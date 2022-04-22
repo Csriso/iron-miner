@@ -1,5 +1,7 @@
 
-![Logo](https://github.com/Csriso/iron-miner/blob/main/banner.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Csriso/iron-miner/blob/main/banner.png?raw=true" />
+</p>
 
 
 # Iron-Miner
