@@ -32,10 +32,13 @@ body{
     text-align: center;
 }
 #test-canvas {
-    width: 768px;
-    height: 768px;
+    width: 1200px;
+    height: 1200px;
     align-self: center;
     background-color: gainsboro;
+    -webkit-box-shadow: 0px 0px 60px 6px rgba(0,0,0,1);
+    -moz-box-shadow: 0px 0px 60px 6px rgba(0,0,0,1);
+    box-shadow: 0px 0px 60px 6px rgba(0,0,0,1);
  }
 
  .table{

@@ -4,8 +4,8 @@ class Player {
     this.moving = false;
     this.health = 100;
     this.stamina = 100;
-    this.posX = 100;
-    this.posY = 100;
+    this.posX = 5;
+    this.posY = 5;
     this.speed = 3;
     this.totalFrame = 0;
     this.lastFrame = 0;
@@ -125,7 +125,7 @@ class Player {
     // TAMAÑO TILE DEFECTO
     let tileHeight = 16;
     let tileWidth = 16;
-    let tileOutputSize = 1;
+    let tileOutputSize = 1.2;
 
     let tileSize = 16;
 

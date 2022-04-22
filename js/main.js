@@ -1,9 +1,11 @@
 const canvas = document.getElementById("test-canvas");
 const context = canvas.getContext("2d");
+// context.scale(2, 2);
 let isGameOn = true;
 let game;
 let soundPlaying = "";
 let player = new Player();
+let arrEnemies = [];
 
 const startGame = () => {
   createEvents();

@@ -5,13 +5,13 @@ drawAllTiles = () => {
 
 drawGrass = () => {
   const tileAtlas = new Image();
-  tileAtlas.src = "../assets/grass.png";
+  tileAtlas.src = "../assets/serene.png";
   let tileSize = 16;
-  let tileOutputSize = 1.2;
+  let tileOutputSize = 1;
   let updatedTileSize = tileSize * tileOutputSize;
 
-  let atlasCol = 1;
-  let atlasRow = 1;
+  let atlasCol = 19;
+  let atlasRow = 48;
   let mapCols = 40;
   let mapRows = 40;
   let mapHeight = mapRows * tileSize;
@@ -48,7 +48,7 @@ drawRocks = () => {
   const tileAtlas = new Image();
   tileAtlas.src = "../assets/rock.png";
   let tileSize = 16;
-  let tileOutputSize = 1.2;
+  let tileOutputSize = 1;
   let updatedTileSize = tileSize * tileOutputSize;
 
   let atlasCol = 1;
