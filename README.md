@@ -1,1 +1,62 @@
-# iron-miner
+
+![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+
+
+# Iron-Miner
+
+2D game pokemon style for the first proyect of IronHack.
+
+
+## Screenshots
+
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+
+## MVP
+
+- Add basic collisions.
+
+- Add enemies that spawn at randomly locations.
+
+- Enemies follow you and can attack you.
+
+- Player can attack enemies and mine ores.
+ 
+- Player animations of idle, walk and attack.
+ 
+- Enemies animations of walk.
+ 
+- Enemies run to your position to damage you.
+ 
+- Iron ores spawn at random location and you get coins if you mine them.
+ 
+
+## Backlog
+
+- Shop to improve health and attributes.
+
+- Trees with the same functionality of iron ores.
+
+- Sounds/music.
+
+## Proyect layout
+
+`main.js -> startgame and gameLoop`
+
+`assetsInit.js -> initialization of images and audios`
+
+`Player.js -> main character class`
+
+`Enemy.js -> enemies class`
+
+`tileData.js -> data for the generation of the scenario`
+
+`tileDrawer.js -> functions and loops to generate the scenario from the data recived in tileData.js`
+
+`utils.js -> data for the generation of the scenario`
+
+`events.js -> keyboard events`
+
+`collision.js -> collision related functions`
+
+
