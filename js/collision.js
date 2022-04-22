@@ -6,7 +6,20 @@ let collisionWithPlayer = (enemy) => {
     player.h + player.posY > enemy.posY
   ) {
     // collision detected!
-    console.log("COLISION");
+    return true;
+  } else {
+    // no collision
+  }
+};
+
+let collision = (x, y) => {
+  if (
+    x.posX < y.posX + y.w &&
+    x.posX + x.w > y.posX &&
+    x.posY < y.posY + y.h &&
+    x.h + x.posY > y.posY
+  ) {
+    // collision detected!
     return true;
   } else {
     // no collision

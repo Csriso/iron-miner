@@ -1,6 +1,6 @@
 let bgMusic = new Audio("../assets/title.wav");
 bgMusic.preload = "auto";
-bgMusic.load();
+// bgMusic.load();
 // bgMusic.play();
 
 //IDLE CHARACTER

@@ -1,50 +1,193 @@
 /* CSS code */
-body{
-    margin: 0;    
-    height: 100vh;
+body {
+  margin: 0;
+  height: 100vh;
 }
-.container{
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    background-image: url("../assets/woodbg.jpg");
+.container {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  align-content: center;
+  justify-items: center;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: black;
+  background-image: url("../assets/woodbg.jpg");
 }
-.container-left, .container-right{
-    /* testing PURPPOSES */
-    opacity: 0;
-    /* testing PURPPOSES */
-
-
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    justify-self: center;
-    align-self: center;
-    text-align: center;
-    margin: 0 auto;
+.container-left,
+.container-right {
+  /* testing PURPPOSES */
+  /* opacity: 0; */
+  /* testing PURPPOSES */
+  height: 80vh;
+  width: 90%;
+  margin: 0;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  margin: 0 auto;
 }
-.canvas-container{
-    text-align: center;
+.canvas-container {
+  text-align: center;
 }
 #test-canvas {
-    width: 1200px;
-    height: 1200px;
-    align-self: center;
-    background-color: gainsboro;
-    -webkit-box-shadow: 0px 0px 60px 6px rgba(0,0,0,1);
-    -moz-box-shadow: 0px 0px 60px 6px rgba(0,0,0,1);
-    box-shadow: 0px 0px 60px 6px rgba(0,0,0,1);
- }
+  width: 1200px;
+  height: 1200px;
+  align-self: center;
+  background-color: gainsboro;
+  -webkit-box-shadow: 0px 0px 60px 6px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 60px 6px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 60px 6px rgba(0, 0, 0, 1);
+}
 
- .table{
-    width: 100%;
-    height: 100%;
-    background-color: darksalmon;
-    justify-content: center;
-    text-overflow: none;
- }
+.table {
+  border-radius: 50px;
+  width: 100%;
+  height: 100%;
+  background-color: darksalmon;
+  justify-content: center;
+  text-overflow: none;
+  /* animation: fadeIn 2s forwards;
+     -webkit-animation: fadeIn 2.0s forwards;  */
+}
+
+.container-right {
+  animation: fadeInSlideRight 2s forwards;
+  -webkit-animation: fadeInSlideRight 2s forwards;
+}
+.container-left {
+  animation: fadeInSlideLeft 2s forwards;
+  -webkit-animation: fadeInSlideLeft 2s forwards;
+}
+#gameoverBtn {
+  display: none;
+}
+
+.floatBtnsRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: white;
+  width: 200px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 10px;
+  margin-right: 15px;
+}
+canvas {
+  display: none;
+}
+.floatBtnsRight .flex-row {
+  padding: 10px;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+}
+#startBtn:hover {
+  animation: shake 0.5s;
+  animation-fill-mode: forwards;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 0.2;
+  }
+  30% {
+    opacity: 0.3;
+  }
+  40% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  60% {
+    opacity: 0.6;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+/* REVISAR ANIMACIONES */
+@keyframes fadeInSlideRight {
+    from {
+        margin-left: 100%;
+        opacity: 0;
+      }
+      to {
+        margin-left: 0%;
+        opacity: 1;
+      }
+}
+
+@keyframes fadeInSlideLeft {
+  from {
+    margin-right: 100%;
+    opacity: 0;
+  }
+  to {
+    margin-right: 0%;
+    opacity: 1;
+  }
+}
