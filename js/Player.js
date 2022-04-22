@@ -6,6 +6,8 @@ class Player {
     this.stamina = 100;
     this.posX = 100;
     this.posY = 100;
+    this.w = 16;
+    this.h = 16;
     this.speed = 3;
     this.totalFrame = 0;
     this.lastFrame = 0;

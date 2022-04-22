@@ -1,12 +1,14 @@
-class Player {
-  constructor() {
+class Enemy {
+  constructor(posX, posY) {
     this.direction = 0;
     this.moving = false;
     this.health = 100;
     this.stamina = 100;
-    this.posX = 5;
-    this.posY = 5;
-    this.speed = 3;
+    this.posX = posX;
+    this.posY = posY;
+    this.speed = 1;
+    this.w = 16;
+    this.h = 16;
     this.totalFrame = 0;
     this.lastFrame = 0;
     this.frames = [0, 16, 32, 48, 64];
@@ -15,117 +17,68 @@ class Player {
     this.movingX = 0;
     this.movingY = 0;
     this.isAttacking = false;
+    this.difXdifYcounter = 0;
   }
   spawnPlayer = () => {
     this.create();
   };
-  animateIdle = () => {};
-  animateWalk = () => {};
-  animateAttack = () => {};
-  keepMoving = () => {
-    if (this.movingX === 1 && this.movingY === 0) {
-      this.posX += this.speed;
-    } else if (this.movingX === -1 && this.movingY === 0) {
-      this.posX -= this.speed;
-    } else if (this.movingY === 1 && this.movingX === 0) {
-      this.posY += this.speed;
-    } else if (this.movingY === -1 && this.movingX === 0) {
-      this.posY -= this.speed;
+  findPlayer = (x, y) => {
+    let difX = this.posX - x;
+    let difY = this.posY - y;
+    if (difX < 0) {
+      difX *= -1;
     }
-  };
-  eventCatcherMovePlayer = (posX, posY, keyEvent) => {
-    if (
-      posY === undefined &&
-      posX === undefined &&
-      keyEvent === "keyDownSpace"
-    ) {
-      this.playerMoving = false;
-      this.isAttacking = true;
-    } else if (
-      posY === undefined &&
-      posX === undefined &&
-      keyEvent === "keyUpSpace"
-    ) {
-      this.playerMoving = false;
-      this.isAttacking = false;
+    if (difY < 0) {
+      difY *= -1;
     }
-    if (posX && posX !== undefined) {
-      //DERECHA
-      if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
-        this.movementType = 3;
-        this.movingX = 1;
-        this.playerMoving = true;
-      } else if (keyEvent === "keyup") {
-        this.movingX = 0;
-        this.playerMoving = false;
-      }
-    } else if (!posX && posX !== undefined) {
-      //IZQUIERDA
-      if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
+    // console.log(difX, difY, this.posX, this.posY, x, y);
+    /// SI LA DIFERENCIA DE DISTANCIA EN X ES MAYOR A LA DE Y
+
+    if (difX >= difY) {
+      if (this.posX >= x) {
         this.movementType = 1;
-        this.movingX = -1;
         this.playerMoving = true;
-      } else if (keyEvent === "keyup") {
-        this.movingX = 0;
-        this.playerMoving = false;
-      }
-    } else if (!posY && posY !== undefined) {
-      //ABAJO
-      if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
-        this.movementType = 0;
-        this.movingY = 1;
+        this.posX -= this.speed;
+      } else if (this.posX < x) {
+        this.movementType = 3;
         this.playerMoving = true;
-      } else if (keyEvent === "keyup") {
-        this.movingY = 0;
-        this.playerMoving = false;
+        this.posX += this.speed;
       }
-    } else if (posY && posY !== undefined) {
-      // ARRIBA
-      if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
+    } else if (difX <= difY) {
+      if (this.posY > y) {
         this.movementType = 2;
-        this.movingY = -1;
         this.playerMoving = true;
-      } else if (keyEvent === "keyup") {
-        this.movingY = 0;
-        this.playerMoving = false;
+        this.posY -= this.speed;
+      } else if (this.posY < y) {
+        this.movementType = 0;
+        this.playerMoving = true;
+        this.posY += this.speed;
       }
     }
   };
   create = () => {
     let imgToUse;
-    if (this.isAttacking === false) {
-      if (this.movementType === 0 && this.playerMoving === true) {
-        imgToUse = charWalkImgDown;
-      } else if (this.movementType === 1 && this.playerMoving === true) {
-        imgToUse = charWalkImgLeft;
-      } else if (this.movementType === 2 && this.playerMoving === true) {
-        imgToUse = charWalkImgUp;
-      } else if (this.movementType === 3 && this.playerMoving === true) {
-        imgToUse = charWalkImgRight;
-      } else if (this.movementType === 0 && this.playerMoving === false) {
-        imgToUse = charImgDown;
-      } else if (this.movementType === 1 && this.playerMoving === false) {
-        imgToUse = charImgLeft;
-      } else if (this.movementType === 2 && this.playerMoving === false) {
-        imgToUse = charImgUp;
-      } else if (this.movementType === 3 && this.playerMoving === false) {
-        imgToUse = charImgRight;
-      }
-    } else if (this.isAttacking === true) {
-      if (this.isAttacking && this.movementType === 0) {
-        imgToUse = charAttackImgDown;
-      } else if (this.isAttacking && this.movementType === 1) {
-        imgToUse = charAttackImgLeft;
-      } else if (this.isAttacking && this.movementType === 2) {
-        imgToUse = charAttackImgUp;
-      } else if (this.isAttacking && this.movementType === 3) {
-        imgToUse = charAttackImgRight;
-      }
+    if (this.movementType === 0 && this.playerMoving === true) {
+      imgToUse = enemyWalkImgDown;
+    } else if (this.movementType === 1 && this.playerMoving === true) {
+      imgToUse = enemyWalkImgLeft;
+    } else if (this.movementType === 2 && this.playerMoving === true) {
+      imgToUse = enemyWalkImgUp;
+    } else if (this.movementType === 3 && this.playerMoving === true) {
+      imgToUse = enemyWalkImgRight;
+    } else if (this.movementType === 0 && this.playerMoving === false) {
+      imgToUse = enemyIdleImgDown;
+    } else if (this.movementType === 1 && this.playerMoving === false) {
+      imgToUse = enemyIdleImgLeft;
+    } else if (this.movementType === 2 && this.playerMoving === false) {
+      imgToUse = enemyIdleImgUp;
+    } else if (this.movementType === 3 && this.playerMoving === false) {
+      imgToUse = enemyIdleImgRight;
     }
     // TAMAÑO TILE DEFECTO
     let tileHeight = 16;
     let tileWidth = 16;
-    let tileOutputSize = 1.2;
+    let tileOutputSize = 1;
 
     let tileSize = 16;
 
