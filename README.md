@@ -1,5 +1,7 @@
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+<p align="center">
+  <img src="https://github.com/Csriso/iron-miner/blob/main/banner.png?raw=true" />
+</p>
 
 
 # Iron-Miner
@@ -9,7 +11,7 @@
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/Csriso/iron-miner/blob/main/screenshot.png?raw=true)
 
 
 ## MVP
