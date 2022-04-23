@@ -6,7 +6,7 @@
 
 # Iron-Miner
 
-2D game pokemon style for the first proyect of IronHack.
+2D game 16 bits sprite game for the first proyect of IronHack.
 
 
 ## Screenshots
