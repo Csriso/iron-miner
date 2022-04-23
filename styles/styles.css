@@ -2,8 +2,15 @@
 body {
   margin: 0;
   height: 100vh;
+  overflow: hidden;
+  display: flex;
+  background-image: url("../assets/pixelwp.jpg");
+  align-items: center;
 }
 .container {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100vh;
   display: grid;
   grid-template-columns: 25% 50% 25%;
@@ -11,11 +18,14 @@ body {
   justify-items: center;
   justify-content: space-evenly;
   align-items: center;
-  background-color: black;
-  background-image: url("../assets/woodbg.jpg");
+  z-index: 3;
+  pointer-events: none;
 }
+
 .container-left,
 .container-right {
+  pointer-events: all;
+
   /* testing PURPPOSES */
   /* opacity: 0; */
   /* testing PURPPOSES */
@@ -26,39 +36,50 @@ body {
   align-self: center;
   text-align: center;
   margin: 0 auto;
+  z-index: 3;
 }
 .canvas-container {
+  pointer-events: all;
   text-align: center;
+  z-index: 3;
 }
 #test-canvas {
-  width: 1200px;
-  height: 1200px;
+  z-index: 4;
+  width: 900px;
+  height: 900px;
   align-self: center;
   background-color: gainsboro;
   -webkit-box-shadow: 0px 0px 60px 6px rgba(0, 0, 0, 1);
   -moz-box-shadow: 0px 0px 60px 6px rgba(0, 0, 0, 1);
   box-shadow: 0px 0px 60px 6px rgba(0, 0, 0, 1);
 }
-
+.game-over-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .table {
+  box-shadow: 1px -1px 107px -7px rgba(0, 0, 0, 0.75) inset;
+  -webkit-box-shadow: 1px -1px 107px -7px rgba(0, 0, 0, 0.75) inset;
+  -moz-box-shadow: 1px -1px 107px -7px rgba(0, 0, 0, 0.75) inset;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
   border-radius: 50px;
   width: 100%;
   height: 100%;
-  background-color: darksalmon;
-  justify-content: center;
+  background-image: url("../assets/mosscbble.png");
+  background-size: 100px;
+
   text-overflow: none;
-  /* animation: fadeIn 2s forwards;
-     -webkit-animation: fadeIn 2.0s forwards;  */
+  z-index: 3;
+}
+.table:hover {
+  animation: bounce 0.5s;
+  animation-direction: alternate;
 }
 
-.container-right {
-  animation: fadeInSlideRight 2s forwards;
-  -webkit-animation: fadeInSlideRight 2s forwards;
-}
-.container-left {
-  animation: fadeInSlideLeft 2s forwards;
-  -webkit-animation: fadeInSlideLeft 2s forwards;
-}
 #gameoverBtn {
   display: none;
 }
@@ -68,17 +89,19 @@ body {
   top: 0;
   right: 0;
   background-color: white;
-  width: 200px;
+  width: 250px;
   border-radius: 10px;
   text-align: center;
   margin-top: 10px;
   margin-right: 15px;
+  z-index: 3;
 }
 canvas {
   display: none;
 }
 .floatBtnsRight .flex-row {
   padding: 10px;
+  z-index: 3;
 }
 .flex-row {
   display: flex;
@@ -88,13 +111,51 @@ canvas {
   justify-content: center;
   align-content: center;
 }
+
 #startBtn:hover {
   animation: shake 0.5s;
   animation-fill-mode: forwards;
-
-  /* When the animation is finished, start again */
   animation-iteration-count: infinite;
 }
+
+#burgerIcon {
+  margin-right: 25px;
+}
+#menu {
+  top: 0px;
+  left: 0px;
+  z-index: 4;
+  width: 95%;
+  height: 95%;
+  margin: 0 auto;
+  border-radius: 50px;
+  background-image: url("../assets/menubg.jpg");
+  opacity: 1;
+  box-shadow: 1px -1px 77px 30px rgba(0, 0, 0, 0.75) inset;
+  -webkit-box-shadow: 1px -1px 77px 30px rgba(0, 0, 0, 0.75) inset;
+  -moz-box-shadow: 1px -1px 77px 30px rgba(0, 0, 0, 0.75) inset;
+}
+#menu #closeMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  margin-top: 50px;
+  margin-right: 85px;
+  font-size: 50px;
+}
+
+#health-img,
+#healthbar-img {
+  height: 63px;
+  margin-top: 30px;
+  width: 250px;
+  position: absolute;
+}
+#healthbar-img {
+  width: 100px;
+}
+/* ANIMATIONS */
 
 @keyframes shake {
   0% {
@@ -132,53 +193,26 @@ canvas {
   }
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.1;
-  }
-  20% {
-    opacity: 0.2;
-  }
-  30% {
-    opacity: 0.3;
-  }
-  40% {
-    opacity: 0.4;
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
   }
   50% {
-    opacity: 0.5;
-  }
-  60% {
-    opacity: 0.6;
-  }
-  70% {
-    opacity: 0.7;
-  }
-  80% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 1;
+    transform: translateY(-20px);
   }
 }
 
-
 /* REVISAR ANIMACIONES */
 @keyframes fadeInSlideRight {
-    from {
-        margin-left: 100%;
-        opacity: 0;
-      }
-      to {
-        margin-left: 0%;
-        opacity: 1;
-      }
+  from {
+    margin-left: 100%;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0%;
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInSlideLeft {
@@ -190,4 +224,90 @@ canvas {
     margin-right: 0%;
     opacity: 1;
   }
+}
+
+@keyframes bounceCat {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(+10px);
+  }
+  75% {
+    transform: translateY(+10px);
+  }
+}
+
+@keyframes bounceInDown {
+  from,
+  60%,
+  75%,
+  90%,
+  to {
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -3000px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 25px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes bounceOutUp {
+  20% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  40%,
+  45% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+.bounceOutUp {
+  animation-name: bounceOutUp;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+.bounceInDown {
+  animation-name: bounceInDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+#balloonCat,
+#sandwitch {
+  position: absolute;
+  top: 10px;
+  z-index: 2;
+  height: 40px;
+  animation: bounceCat 6s linear infinite;
+}
+#sandwitch {
+  opacity: 0;
+  height: 25px;
 }

@@ -8,14 +8,19 @@ let songPlaying = "";
 let musicPlaying = true;
 let player = new Player();
 let arrEnemies = [];
+let mapCollisions = [];
 let enemyCount = 0;
 let maxEnemies = 3;
+let lastAttackSound = 0;
+let timeCounter = 0;
+let intervalCounter;
+let collisionBoolean = false;
+let collisionCount = 0;
 createEvents();
 
 const restartGame = () => {
-  console.log("RESTARTING");
+  collisionBoolean = false;
   isGameOn = true;
-  game;
   soundPlaying = "";
   player = new Player();
   arrEnemies = [];
@@ -24,13 +29,19 @@ const restartGame = () => {
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
   document.querySelector("#gameoverBtn").style.display = "none";
+  document.querySelector("#nameLogo").style.display = "none";
   startGame();
 };
 
 const startGame = () => {
+  intervalCounter = setInterval(() => {
+    timeCounter++;
+  }, 1000);
+  document.querySelector("#nameLogo").style.display = "none";
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
-  gameLoop();
+
+  gameLoop(1);
   bgMusic.preload = "auto";
   bgMusic.load();
   bgMusic.loop = true;
@@ -38,10 +49,26 @@ const startGame = () => {
   // bgMusic.volume = 0.1;
 };
 
-const gameLoop = () => {
-  drawAllTiles();
+const gameLoop = (firstExec) => {
+  collisionCount = 0;
+  if (firstExec === 1) {
+    drawAllTiles(1);
+  } else {
+    drawAllTiles(0);
+  }
   player.spawnPlayer();
-  player.keepMoving();
+  mapCollisions.forEach((collisionObj) => {
+    if (collisionDetector(player, collisionObj)) {
+      collisionCount++;
+    }
+  });
+  if (collisionCount >= 1) {
+    collisionBoolean = true;
+  }
+
+  if (collisionBoolean === false) {
+    player.keepMoving();
+  }
   if (enemyCount < maxEnemies) {
     let randomWidth = randomNumber(16, canvas.width - 16);
     let randomHeight = randomNumber(16, canvas.width - 16);
@@ -55,6 +82,7 @@ const gameLoop = () => {
       enemy.findPlayer(player.posX, player.posY);
       if (collisionWithPlayer(enemy) && player.health > 0) {
         if (player.isAttacking === true) {
+          attackSoundSelector();
           if (enemy.health <= 0) {
             enemyCount--;
             arrEnemies.splice(index, 1);
@@ -62,14 +90,21 @@ const gameLoop = () => {
           enemy.health -= 50;
         }
         player.health -= 1;
+      } else if (player.isAttacking && !collisionWithPlayer(enemy)) {
+        attackSound.play();
       }
     });
   }
 
   if (player.health <= 0) {
+    clearInterval(intervalCounter);
+    mapCollisions = [];
+    timeCounter = 0;
     isGameOn = false;
-    bgMusic.st;
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
     document.querySelector("canvas").style.display = "none";
+    document.querySelector("#nameLogo").style.display = "block";
     document.querySelector("#gameoverBtn").style.display = "block";
   }
 

@@ -1,7 +1,13 @@
-let bgMusic = new Audio("../assets/title.wav");
+let bgMusic = new Audio("../assets/music/main.wav");
 bgMusic.preload = "auto";
-// bgMusic.load();
-// bgMusic.play();
+let attackSound = new Audio("../assets/sounds/swordswing.wav");
+attackSound.preload = "auto";
+let attackFlesh = new Audio("../assets/sounds/swordflesh.wav");
+attackFlesh.preload = "auto";
+let attackFlesh2 = new Audio("../assets/sounds/swordflesh2.wav");
+attackFlesh2.preload = "auto";
+
+// let attackHit = new Audio("../assets/title.wav");
 
 //IDLE CHARACTER
 const charImgDown = new Image();

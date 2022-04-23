@@ -21,9 +21,7 @@ class Player {
   spawnPlayer = () => {
     this.create();
   };
-  animateIdle = () => {};
-  animateWalk = () => {};
-  animateAttack = () => {};
+
   keepMoving = () => {
     if (this.movingX === 1 && this.movingY === 0) {
       this.posX += this.speed;

@@ -5,26 +5,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/styles.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <title>Document</title>
-    
   </head>
   <body>
     <script src="./js/assetsInit.js"></script>
+    <div id="menu" style="display: none;">
+      <span class="material-icons" id="closeMenu">
+        close
+        </span>
+    </div>
     <div class="floatBtnsRight">
       <div class="flex-row">
-      <span class="material-icons" id="volume-icon">
-        volume_up
-        </span>              
-      <input type="range" id="volume-control" value="100">
+        <span class="material-icons" id="burgerIcon">
+          menu
+          </span>
+        <span class="material-icons" id="volume-icon"> volume_up </span>
+        <input type="range" id="volume-control" value="100" />
+      </div>
     </div>
-    </div>
-   
+    <img src="./assets/ballooncat.png" alt="" srcset="" id="balloonCat" />
+    <img src="./assets/sandwitch.png" alt="" srcset="" id="sandwitch">
     <div class="container">
       <div class="container-left">
         <div class="table">
-            <h3>HOLA</h3>
+          <h3>HOLA</h3>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec
@@ -39,21 +47,31 @@
         </div>
       </div>
       <div class="canvas-container">
-        <canvas
-          id="test-canvas"
-          width="639"
-          height="639"
-        ></canvas>
+        <canvas id="test-canvas" width="639" height="639"></canvas>
         <div class="game-over-container">
-          <img src="./assets/gameover.png" alt="gameoverimg" srcset="" id="gameoverBtn">
-          <img src="./assets/start.png" alt="startimg" srcset="" id="startBtn">
+          <img src="./assets/banner.png" alt="" id="nameLogo">
+            <img
+              src="./assets/gameover.png"
+              alt="gameoverimg"
+              srcset=""
+              id="gameoverBtn"
+            />
+            <img
+              src="./assets/start.png"
+              alt="startimg"
+              srcset=""
+              id="startBtn"
+            />
         </div>
       </div>
       <!-- 768 -- 639-->
       <div class="container-right">
         <div class="table">
-            <h3>HOLA</h3>
-           
+
+          <img src="./assets/health.png" alt="" id="health-img">
+          <img src="./assets/healthbar.png" alt="" id="healthbar-img">
+          <h3>HOLA</h3>
+
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec
@@ -68,6 +86,8 @@
         </div>
       </div>
     </div>
+    <script src="./js/MapCollision.js"></script>
+    <script src="./js/soundController.js"></script>
     <script src="./js/events.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/collision.js"></script>
@@ -75,7 +95,6 @@
     <script src="./js/Enemy.js"></script>
     <script src="./js/tileDrawer.js"></script>
     <script src="./js/tileData.js"></script>
-    <script src="./js/game.js"></script>
     <script src="./js/main.js"></script>
   </body>
 </html>

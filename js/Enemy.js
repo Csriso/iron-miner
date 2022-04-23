@@ -31,8 +31,10 @@ class Enemy {
     if (difY < 0) {
       difY *= -1;
     }
+
     // console.log(difX, difY, this.posX, this.posY, x, y);
-    /// SI LA DIFERENCIA DE DISTANCIA EN X ES MAYOR A LA DE Y
+    // SI LA DIFERENCIA DE DISTANCIA EN X ES MAYOR A LA DE Y
+    // https://media.tenor.co/images/fa3143e89d76490bdf83835cbd3d9fed/tenor.gif
 
     if (difX >= difY) {
       if (this.posX >= x) {

@@ -1,6 +1,6 @@
-drawAllTiles = () => {
+drawAllTiles = (param) => {
   drawGrass();
-  drawRocks();
+  drawRocks(param);
 };
 
 drawGrass = () => {
@@ -44,7 +44,7 @@ drawGrass = () => {
     }
   }
 };
-drawRocks = () => {
+drawRocks = (param) => {
   const tileAtlas = new Image();
   tileAtlas.src = "../assets/rock.png";
   let tileSize = 16;
@@ -69,6 +69,15 @@ drawRocks = () => {
         tileVal -= 1;
         sourceY = Math.floor(tileVal / atlasCol) * tileSize;
         sourceX = (tileVal % atlasCol) * tileSize;
+        if (param === 1) {
+          collision = new mapCollision(
+            row * tileOutputSize,
+            col * tileOutputSize,
+            updatedTileSize,
+            updatedTileSize
+          );
+          mapCollisions.push(collision);
+        }
         context.drawImage(
           tileAtlas,
           sourceX,

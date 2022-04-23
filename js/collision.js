@@ -8,11 +8,11 @@ let collisionWithPlayer = (enemy) => {
     // collision detected!
     return true;
   } else {
-    // no collision
+    return false;
   }
 };
 
-let collision = (x, y) => {
+let collisionDetector = (x, y) => {
   if (
     x.posX < y.posX + y.w &&
     x.posX + x.w > y.posX &&
@@ -23,5 +23,6 @@ let collision = (x, y) => {
     return true;
   } else {
     // no collision
+    return false;
   }
 };
