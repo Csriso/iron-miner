@@ -85,7 +85,6 @@ let createEvents = () => {
     hiddenMenu.classList.add("bounceOutUp");
   });
   hiddenMenu.addEventListener("webkitAnimationEnd", function (e) {
-    console.log(e);
     if (e.animationName === "bounceOutUp") {
       hiddenMenu.className = "";
       hiddenMenu.style.display = "none";

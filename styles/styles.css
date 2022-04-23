@@ -83,6 +83,12 @@ body {
 #gameoverBtn {
   display: none;
 }
+#gameoverBtn:hover {
+  animation: shake 0.5s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
 
 .floatBtnsRight {
   position: absolute;
@@ -147,13 +153,36 @@ canvas {
 
 #health-img,
 #healthbar-img {
-  height: 63px;
   margin-top: 30px;
-  width: 250px;
+  width: 300px;
   position: absolute;
 }
 #healthbar-img {
-  width: 100px;
+  width: 250px;
+  position: absolute;
+}
+.grid{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  height: 100%;
+}
+.menu-grid-keys{
+  height: 100%;
+}
+.key{
+  width: 25px;
+}
+.flex-col{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  align-content: center;
+  height: 100%;
 }
 /* ANIMATIONS */
 

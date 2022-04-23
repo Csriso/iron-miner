@@ -30,6 +30,7 @@ const restartGame = () => {
   document.querySelector("#startBtn").style.display = "none";
   document.querySelector("#gameoverBtn").style.display = "none";
   document.querySelector("#nameLogo").style.display = "none";
+  document.querySelector("#health-img").src = "./assets/health/56px.png";
   startGame();
 };
 
@@ -90,6 +91,7 @@ const gameLoop = (firstExec) => {
           enemy.health -= 50;
         }
         player.health -= 1;
+        showHealthImage(player.health);
       } else if (player.isAttacking && !collisionWithPlayer(enemy)) {
         attackSound.play();
       }
@@ -97,6 +99,7 @@ const gameLoop = (firstExec) => {
   }
 
   if (player.health <= 0) {
+    showHealthImage(player.health);
     clearInterval(intervalCounter);
     mapCollisions = [];
     timeCounter = 0;

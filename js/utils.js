@@ -2,6 +2,35 @@ const randomNumber = (max, min) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+const showHealthImage = (health) => {
+  let healthImgToChange = document.querySelector("#health-img");
+  let arrImages = [4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
+  let toFind = Math.floor((health * 56) / 100);
+  let resultFind = findClosest(arrImages, toFind);
+  healthImgToChange.src = "./assets/health/" + resultFind + "px.png";
+  if (health === 0) {
+    healthImgToChange.src = "./assets/health/0px.png";
+  }
+};
+const findClosest = (arr, num) => {
+  const creds = arr.reduce(
+    (acc, val, ind) => {
+      let { diff, index } = acc;
+      const difference = Math.abs(val - num);
+      if (difference < diff) {
+        diff = difference;
+        index = ind;
+      }
+      return { diff, index };
+    },
+    {
+      diff: Infinity,
+      index: -1,
+    }
+  );
+  return arr[creds.index];
+};
+
 const vw = Math.max(
   document.documentElement.clientWidth || 0,
   window.innerWidth || 0
