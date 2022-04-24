@@ -21,11 +21,27 @@ body {
   z-index: 3;
   pointer-events: none;
 }
+.container-left{
+  font-family: pixelFont;
+  font-size: 28px;
+  color: white;
+}
 
+.container-left .table h3, .container-left .table p{
+  margin: 0% 10%;
+  text-align: justify;
+  text-justify: inter-word;
+}
+.container-left .table h3{
+  margin-top: 10%;
+}
+.container-left .table p{
+  margin-top: 10%;
+}
 .container-left,
 .container-right {
   pointer-events: all;
-
+  font-family: pixelFont;
   /* testing PURPPOSES */
   /* opacity: 0; */
   /* testing PURPPOSES */
@@ -184,6 +200,12 @@ canvas {
   align-content: center;
   height: 100%;
 }
+
+@font-face {
+  font-family: pixelFont;
+  src: url(../assets/dpcomic.ttf);
+}
+
 /* ANIMATIONS */
 
 @keyframes shake {

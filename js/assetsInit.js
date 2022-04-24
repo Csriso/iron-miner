@@ -6,6 +6,22 @@ let attackFlesh = new Audio("../assets/sounds/swordflesh.wav");
 attackFlesh.preload = "auto";
 let attackFlesh2 = new Audio("../assets/sounds/swordflesh2.wav");
 attackFlesh2.preload = "auto";
+let gruntPlayer100 = new Audio("../assets/sounds/grunt1.wav");
+gruntPlayer100.preload = "auto";
+let gruntPlayer80 = new Audio("../assets/sounds/grunt3.wav");
+gruntPlayer80.preload = "auto";
+let gruntPlayer60 = new Audio("../assets/sounds/grunt2.wav");
+gruntPlayer60.preload = "auto";
+let gruntPlayer40 = new Audio("../assets/sounds/grunt7.wav");
+gruntPlayer40.preload = "auto";
+let gruntPlayer20 = new Audio("../assets/sounds/grunt4.wav");
+gruntPlayer20.preload = "auto";
+let playerDeadSound = new Audio("../assets/sounds/playerdead.wav");
+playerDeadSound.preload = "auto";
+let coinSound = new Audio("../assets/sounds/coin.wav");
+coinSound.preload = "auto";
+let heartSound = new Audio("../assets/sounds/heart.wav");
+heartSound.preload = "auto";
 
 // let attackHit = new Audio("../assets/title.wav");
 
@@ -58,3 +74,13 @@ enemyWalkImgDown.src = "../assets/enemy/walk/walk_down.png";
 enemyWalkImgLeft.src = "../assets/enemy/walk/walk_left.png";
 enemyWalkImgUp.src = "../assets/enemy/walk/walk_up.png";
 enemyWalkImgRight.src = "../assets/enemy/walk/walk_right.png";
+
+// ITEMS
+const heartSprite = new Image();
+heartSprite.src = "../assets/heart.png";
+const goldenOreSprite = new Image();
+goldenOreSprite.src = "../assets/goldenore.png";
+// const goldenOreSprite = new Image();
+// goldenOreSprite.src = "../assets/goldenore.png";
+const coinSprite = new Image();
+coinSprite.src = "../assets/coin.png";

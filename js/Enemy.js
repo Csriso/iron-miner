@@ -1,5 +1,5 @@
 class Enemy {
-  constructor(posX, posY) {
+  constructor(posX, posY, type) {
     this.direction = 0;
     this.moving = false;
     this.health = 100;
@@ -11,13 +11,13 @@ class Enemy {
     this.h = 16;
     this.totalFrame = 0;
     this.lastFrame = 0;
-    this.frames = [0, 16, 32, 48, 64];
     this.playerMoving = false;
     this.movementType = 0;
     this.movingX = 0;
     this.movingY = 0;
     this.isAttacking = false;
     this.difXdifYcounter = 0;
+    this.type = type;
   }
   spawnPlayer = () => {
     this.create();

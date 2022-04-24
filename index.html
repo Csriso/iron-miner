@@ -9,35 +9,24 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>IronMiner❤️</title>
   </head>
   <body>
     <script src="./js/assetsInit.js"></script>
-    <div id="menu" style="display: none;">
-      <span class="material-icons" id="closeMenu">
-        close
-        </span>
-        <!-- <div class="grid">
-          <div class="menu-grid-keys">
-            <img src="./assets/keys/up1.png" alt="" class="key">
-            <img src="./assets/keys/down1.png" alt="" class="key">
-            <img src="./assets/keys/right1.png" alt="" class="key">
-            <img src="./assets/keys/left1.png" alt="" class="key">
-            <img src="./assets/keys/space1.png" alt="" class="key">
-          </div>
-        </div> -->
+    <div id="menu" style="display: none">
+      <span class="material-icons" id="closeMenu"> close </span>
+      <img src="./assets/menu.png" alt="" srcset="" id="imgMenu1" style="display:block">
+      <img src="./assets/menu1.png" alt="" srcset="" id="imgMenu2" style="display:none">
     </div>
     <div class="floatBtnsRight">
       <div class="flex-row">
-        <span class="material-icons" id="burgerIcon">
-          menu
-          </span>
+        <span class="material-icons" id="burgerIcon"> menu </span>
         <span class="material-icons" id="volume-icon"> volume_up </span>
         <input type="range" id="volume-control" value="100" />
       </div>
     </div>
     <img src="./assets/ballooncat.png" alt="" srcset="" id="balloonCat" />
-    <img src="./assets/sandwitch.png" alt="" srcset="" id="sandwitch">
+    <img src="./assets/sandwitch.png" alt="" srcset="" id="sandwitch" />
     <div class="container">
       <div class="container-left">
         <div class="table">
@@ -58,27 +47,34 @@
       <div class="canvas-container">
         <canvas id="test-canvas" width="639" height="639"></canvas>
         <div class="game-over-container">
-          <img src="./assets/banner.png" alt="" id="nameLogo">
-            <img
-              src="./assets/gameover.png"
-              alt="gameoverimg"
-              srcset=""
-              id="gameoverBtn"
-            />
-            <img
-              src="./assets/start.png"
-              alt="startimg"
-              srcset=""
-              id="startBtn"
-            />
+          <img src="./assets/banner.png" alt="" id="nameLogo" />
+          <img
+            src="./assets/gameover.png"
+            alt="gameoverimg"
+            srcset=""
+            id="gameoverBtn"
+          />
+          <img
+            src="./assets/start.png"
+            alt="startimg"
+            srcset=""
+            id="startBtn"
+            style="display:none"
+          />
+          <img
+            src="./assets/loading.png"
+            alt="loadingimg"
+            srcset=""
+            id="startBtnLoading"
+            style=""
+          />
         </div>
       </div>
       <!-- 768 -- 639-->
       <div class="container-right">
         <div class="table">
-
-          <img src="./assets/health/56px.png" alt="" id="health-img">
-          <h3>HOLA</h3>
+          <img src="./assets/health/56px.png" alt="" id="health-img" />
+          <!-- <h3>HOLA</h3>
 
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -90,7 +86,7 @@
             pharetra et ultrices. Ultrices vitae auctor eu augue ut lectus arcu
             bibendum at. Elementum integer enim neque volutpat. Egestas diam in
             arcu cursus.
-          </p>
+          </p> -->
         </div>
       </div>
     </div>
@@ -100,6 +96,7 @@
     <script src="./js/utils.js"></script>
     <script src="./js/collision.js"></script>
     <script src="./js/Player.js"></script>
+    <script src="./js/MapObject.js"></script>
     <script src="./js/Enemy.js"></script>
     <script src="./js/tileDrawer.js"></script>
     <script src="./js/tileData.js"></script>

@@ -39,7 +39,9 @@ let createEvents = () => {
     restartGame();
   });
 
+  // VOLUME CONTROL START
   let volume = document.querySelector("#volume-control");
+  let savedVolumeState = 0;
   volume.addEventListener("change", function (e) {
     setAllSoundsVolume(e.currentTarget.value / 100);
     if (e.currentTarget.value / 100 === 0) {
@@ -53,22 +55,24 @@ let createEvents = () => {
 
   let volumeIcon = document.querySelector("#volume-icon");
   volumeIcon.addEventListener("click", function (e) {
-    if (musicPlaying) {
-      musicPlaying = false;
+    if (volume.value >= 1) {
+      savedVolumeState = volume.value;
       bgMusic.volume = 0;
+      volume.value = 0;
       setAllSoundsVolume(0);
       document.querySelector("#volume-icon").innerText = "volume_mute";
     } else {
-      musicPlaying = true;
+      volume.value = savedVolumeState;
       document.querySelector("#volume-icon").innerText = "volume_up";
       setAllSoundsVolume(document.querySelector("#volume-control").value / 100);
     }
   });
+  // VOLUME CONTROL FINISH
 
-  let startGameBtn = document.querySelector("#startBtn");
-  startGameBtn.addEventListener("click", function (e) {
-    startGame();
-  });
+  // let startGameBtn = document.querySelector("#startBtn");
+  // startGameBtn.addEventListener("click", function (e) {
+  //   startGame();
+  // });
 
   const burgerMenuBtn = document.querySelector("#burgerIcon");
   const hiddenMenu = document.querySelector("#menu");
@@ -97,5 +101,17 @@ let createEvents = () => {
   });
   catAnimate.addEventListener("mouseleave", function () {
     sandwitch.style.opacity = 0;
+  });
+
+  window.addEventListener("load", function () {
+    let startGameBtn = document.querySelector("#startBtn");
+    let loadingGameBtn = this.document.querySelector("#startBtnLoading");
+
+    // do things after the DOM loads fully
+    startGameBtn.style.display = "";
+    loadingGameBtn.style.display = "none";
+    startGameBtn.addEventListener("click", function (e) {
+      startGame();
+    });
   });
 };

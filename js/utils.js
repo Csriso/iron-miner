@@ -40,6 +40,7 @@ const sandwitch = document.querySelector("#sandwitch");
 let leftCat = 0;
 let topCat = 0;
 let omgSandwitch = 0;
+let menuAnimChanger = true;
 setInterval(() => {
   catAnimate.style.marginLeft = leftCat.toString() + "px";
   catAnimate.style.marginTop = topCat.toString() + "px";
@@ -56,4 +57,20 @@ setInterval(() => {
   leftCat++;
 }, 1000 / 60);
 
+// CHANGE IMG SLIDE MENU TO ANIMATE IT
+let imgMenuSelector1 = document.querySelector("#imgMenu1");
+let imgMenuSelector2 = document.querySelector("#imgMenu2");
+setInterval(() => {
+  if (menuAnimChanger) {
+    imgMenuSelector1.style.display = "none";
+    imgMenuSelector2.style.display = "";
+
+    menuAnimChanger = false;
+  } else {
+    imgMenuSelector1.style.display = "";
+    imgMenuSelector2.style.display = "none";
+    menuAnimChanger = true;
+  }
+}, 350);
+// HIDE MENU BY DEFAULT
 document.querySelector("#menu").display = "none";

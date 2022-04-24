@@ -12,12 +12,12 @@ let collisionWithPlayer = (enemy) => {
   }
 };
 
-let collisionDetector = (x, y) => {
+let collisionDetector = (first, second) => {
   if (
-    x.posX < y.posX + y.w &&
-    x.posX + x.w > y.posX &&
-    x.posY < y.posY + y.h &&
-    x.h + x.posY > y.posY
+    first.posX < second.posX + second.w &&
+    first.posX + first.w > second.posX &&
+    first.posY < second.posY + second.h &&
+    first.h + first.posY > second.posY
   ) {
     // collision detected!
     return true;

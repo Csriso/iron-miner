@@ -8,20 +8,24 @@ class Player {
     this.posY = 100;
     this.w = 16;
     this.h = 16;
-    this.speed = 3;
+    this.speed = 1;
     this.totalFrame = 0;
     this.lastFrame = 0;
-    this.frames = [0, 16, 32, 48, 64];
     this.playerMoving = false;
     this.movementType = 0;
     this.movingX = 0;
     this.movingY = 0;
     this.isAttacking = false;
+    this.kills = 0;
+    this.score = 0;
+    this.coins = 0;
   }
   spawnPlayer = () => {
     this.create();
   };
-
+  reciveDamage = (damage) => {
+    this.health -= damage;
+  };
   keepMoving = () => {
     if (this.movingX === 1 && this.movingY === 0) {
       this.posX += this.speed;
@@ -50,7 +54,7 @@ class Player {
       this.isAttacking = false;
     }
     if (posX && posX !== undefined) {
-      //DERECHA
+      // RIGHT
       if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
         this.movementType = 3;
         this.movingX = 1;
@@ -60,7 +64,7 @@ class Player {
         this.playerMoving = false;
       }
     } else if (!posX && posX !== undefined) {
-      //IZQUIERDA
+      // LEFT
       if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
         this.movementType = 1;
         this.movingX = -1;
@@ -70,7 +74,7 @@ class Player {
         this.playerMoving = false;
       }
     } else if (!posY && posY !== undefined) {
-      //ABAJO
+      // DOWN
       if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
         this.movementType = 0;
         this.movingY = 1;
@@ -80,7 +84,7 @@ class Player {
         this.playerMoving = false;
       }
     } else if (posY && posY !== undefined) {
-      // ARRIBA
+      // UP
       if (keyEvent === "keydown" && this.movingY === 0 && this.movingX === 0) {
         this.movementType = 2;
         this.movingY = -1;
@@ -122,7 +126,7 @@ class Player {
         imgToUse = charAttackImgRight;
       }
     }
-    // TAMAÑO TILE DEFECTO
+    // DEFAULT TILESIZE
     let tileHeight = 16;
     let tileWidth = 16;
     let tileOutputSize = 1;
@@ -133,7 +137,7 @@ class Player {
     let atlasWidth = tileWidth;
     let mapIndex = 0;
 
-    // CAMBIO TAMAÑO DE ATLAS Y DE OUTPUT DEL PERSONAJE SEGUN SE MUEVE O SE QUEDA QUIETO (16px QUIETO 17px MOVIENDOSE)
+    // ATLAS SIZE DEPENDING OF THE SPRITE USED
     if (this.playerMoving === true && this.isAttacking === false) {
       atlasHeight = 17;
       atlasWidth = 96;
@@ -141,17 +145,17 @@ class Player {
       atlasHeight = 16;
       atlasWidth = 96;
     } else if (this.isAttacking === true) {
-      //ARRIBA O ABAJO
+      // UP OR DOWN
       if (this.movementType === 0 || this.movementType === 2) {
         atlasHeight = 23;
         atlasWidth = 138;
-      } // DER O IZQ
+      } // RIGHT OR LEFT
       else if (this.movementType === 1 || this.movementType === 3) {
         atlasHeight = 21;
         atlasWidth = 96;
       }
     }
-    // VELOCIDAD DE ANIMACION
+    // ANIMATION VELOCITY
     if (this.totalFrame === 5) {
       this.totalFrame = 0;
       if (this.lastFrame <= 4) {
@@ -177,18 +181,17 @@ class Player {
       // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
       context.drawImage(
         imgToUse,
-        animationToShow, //ORIGEN TILESET X
-        0, //ORIGEN TILESET Y
-        tileWidth, // TILESET WIDTH (VARIA SEGUN SPRITE)
-        tileHeight, // TILESET HEIGHT (VARIA SEGUN SPRITE)
-        this.posX, //POSICION CANVAS X
-        this.posY, //POSICION CANVAS Y
-        updatedTileSizeWx, // AUMENTO X
-        updatedTileSizeHy // AUMENTO Y
+        animationToShow, //ORIGIN TILESET X
+        0, //ORIGIN TILESET Y
+        tileWidth, // TILESET WIDTH
+        tileHeight, // TILESET HEIGHT
+        this.posX, //POSITION CANVAS X
+        this.posY, //POSITION CANVAS Y
+        updatedTileSizeWx, // SIZE OUTPUT MODIFIER X
+        updatedTileSizeHy // SIZE OUTPUT MODIFIER Y
       );
       mapIndex++;
     }
     this.totalFrame++;
-    // console.log(arrayTest);
   };
 }
