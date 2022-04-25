@@ -8,7 +8,7 @@ class Player {
     this.posY = 100;
     this.w = 16;
     this.h = 16;
-    this.speed = 1;
+    this.speed = 3;
     this.totalFrame = 0;
     this.lastFrame = 0;
     this.playerMoving = false;
@@ -23,6 +23,7 @@ class Player {
     this.canMoveLeft = true;
     this.canMoveDown = true;
     this.canMoveUp = true;
+    this.attackDamage = 0;
   }
   spawnPlayer = () => {
     this.create();

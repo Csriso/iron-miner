@@ -16,22 +16,23 @@
 
 ## MVP
 
-- Add basic collisions.
+- Add basic collisions. DONE
 
-- Add enemies that spawn at randomly locations.
+- Add enemies that spawn at randomly locations. DONE
 
-- Enemies follow you and can attack you.
+- Enemies follow you and can attack you. DONE
 
-- Player can attack enemies and mine ores.
+- Player can attack enemies and mine ores. DONE
  
-- Player animations of idle, walk and attack.
+- Player animations of idle, walk and attack. DONE
  
-- Enemies animations of walk.
+- Enemies animations of walk. DONE
  
-- Enemies run to your position to damage you.
+- Enemies run to your position to damage you. DONE
  
-- Iron ores spawn at random location and you get coins if you mine them.
+- Iron ores spawn at random location and you get coins if you mine them. DONE
  
+- Sounds/music. DONE
 
 ## Backlog
 
@@ -39,7 +40,8 @@
 
 - Trees with the same functionality of iron ores.
 
-- Sounds/music.
+- Improve collisions.
+
 
 ## Proyect layout
 
@@ -51,11 +53,17 @@
 
 `Enemy.js -> enemies class`
 
+`MapObject.js -> ore, heart and coin creator class`
+
+`MapCollision.js -> collision class to save collision points of the player`
+
+`soundController.js -> functions to manage the sound`
+
 `tileData.js -> data for the generation of the scenario`
 
 `tileDrawer.js -> functions and loops to generate the scenario from the data recived in tileData.js`
 
-`utils.js -> data for the generation of the scenario`
+`utils.js -> general functions`
 
 `events.js -> keyboard events`
 

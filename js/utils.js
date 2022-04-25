@@ -2,6 +2,16 @@ const randomNumber = (max, min) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+const randomHeight = () => {
+  let randomHeight = randomNumber(canvas.height - 16, 16);
+  return randomHeight;
+};
+
+const randomWidth = () => {
+  let randomWidth = randomNumber(canvas.width - 16, 16);
+  return randomWidth;
+};
+
 const randonHeightAndWidth = () => {
   let randomHeight = randomNumber(canvas.height - 16, 16);
   let randomWidth = randomNumber(canvas.width - 16, 16);

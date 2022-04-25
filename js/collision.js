@@ -1,9 +1,9 @@
 let collisionWithPlayer = (enemy) => {
   if (
-    player.posX < enemy.posX + enemy.w &&
-    player.posX + player.w > enemy.posX &&
-    player.posY < enemy.posY + enemy.h &&
-    player.h + player.posY > enemy.posY
+    player.posX < enemy.posX + enemy.w + 4 &&
+    player.posX + player.w + 4 > enemy.posX &&
+    player.posY < enemy.posY + enemy.h + 4 &&
+    player.h + 4 + player.posY > enemy.posY
   ) {
     // collision detected!
     return true;
@@ -42,54 +42,54 @@ let collisionDetectorCoords = (firstX, firstY, firstW, firstH, second) => {
   }
 };
 
-let calculateNextCollisionPlayer = (player, second) => {
-  if (player.movingX === 1 && player.movingY === 0) {
+let calculateNextCollision = (first, second) => {
+  if (first.movingX === 1 && first.movingY === 0) {
     if (
       collisionDetectorCoords(
-        player.posX + player.speed,
-        player.posY,
-        player.w,
-        player.h,
+        first.posX + first.speed,
+        first.posY,
+        first.w,
+        first.h,
         second
       )
     ) {
-      player.canMoveRight = false;
+      first.canMoveRight = false;
     }
-  } else if (player.movingX === -1 && player.movingY === 0) {
+  } else if (first.movingX === -1 && first.movingY === 0) {
     if (
       collisionDetectorCoords(
-        player.posX - player.speed,
-        player.posY,
-        player.w,
-        player.h,
+        first.posX - first.speed,
+        first.posY,
+        first.w,
+        first.h,
         second
       )
     ) {
-      player.canMoveLeft = false;
+      first.canMoveLeft = false;
     }
-  } else if (player.movingX === 0 && player.movingY === 1) {
+  } else if (first.movingX === 0 && first.movingY === 1) {
     if (
       collisionDetectorCoords(
-        player.posX,
-        player.posY + player.speed,
-        player.w,
-        player.h,
+        first.posX,
+        first.posY + first.speed,
+        first.w,
+        first.h,
         second
       )
     ) {
-      player.canMoveDown = false;
+      first.canMoveDown = false;
     }
-  } else if (player.movingX === 0 && player.movingY === -1) {
+  } else if (first.movingX === 0 && first.movingY === -1) {
     if (
       collisionDetectorCoords(
-        player.posX,
-        player.posY - player.speed,
-        player.w,
-        player.h,
+        first.posX,
+        first.posY - first.speed,
+        first.w,
+        first.h,
         second
       )
     ) {
-      player.canMoveUp = false;
+      first.canMoveUp = false;
     }
   }
 };

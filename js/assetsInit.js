@@ -22,6 +22,8 @@ let coinSound = new Audio("../assets/sounds/coin.wav");
 coinSound.preload = "auto";
 let heartSound = new Audio("../assets/sounds/heart.wav");
 heartSound.preload = "auto";
+let pickaxeSound = new Audio("../assets/sounds/pickaxe.wav");
+pickaxeSound.preload = "auto";
 
 // let attackHit = new Audio("../assets/title.wav");
 

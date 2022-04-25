@@ -215,6 +215,10 @@ canvas {
 .storeClass{
   margin-top: 50px;
 }
+.items-shop{
+  font-size: 30px;
+}
+
 @font-face {
   font-family: pixelFont;
   src: url(../assets/dpcomic.ttf);

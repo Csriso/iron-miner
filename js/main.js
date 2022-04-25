@@ -10,14 +10,19 @@ let player = new Player();
 let arrEnemies = [];
 let mapCollisions = [];
 let mapObjectsArr = [];
-let enemyCount = 0;
-let maxEnemies = 3;
+let enemyCount = 1;
+let maxEnemies = 2;
 let lastAttackSound = 0;
 let timeCounter = 0;
 let intervalCounter;
 let collisionCount = 0;
 let collisionDetected;
 let nextCollision = false;
+let inTheShop = false;
+let maxOres = 2;
+let currentOres = 0;
+let currentEnemies = 0;
+const shop = { posX: 48, posY: 64, w: 48, h: 32 };
 
 let fps = 60;
 
@@ -38,7 +43,7 @@ const restartGame = () => {
   player = new Player();
   arrEnemies = [];
   enemyCount = 0;
-  maxEnemies = 3;
+  maxEnemies = 2;
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
   document.querySelector("#gameoverBtn").style.display = "none";
@@ -77,24 +82,31 @@ const gameLoop = (firstExec) => {
   }
   player.spawnPlayer();
   mapCollisions.forEach((collisionObj) => {
-    calculateNextCollisionPlayer(player, collisionObj);
+    calculateNextCollision(player, collisionObj);
   });
 
-  if (enemyCount < maxEnemies) {
+  if (currentOres < maxOres) {
+    currentOres++;
+    let firstOre = new MapObject(randomWidth(), randomHeight(), "goldenOre");
+    mapObjectsArr.push(firstOre);
+  }
+  console.log(currentEnemies, maxEnemies);
+  if (currentEnemies < maxEnemies) {
     let randomHeightAndWidth = randonHeightAndWidth();
     const enemy = new Enemy(
       randomHeightAndWidth.width,
       randomHeightAndWidth.height,
       "normal"
     );
+    currentEnemies++;
     arrEnemies.push(enemy);
-    enemyCount++;
   }
+
   if (arrEnemies.length !== 0) {
     arrEnemies.forEach((enemy, index) => {
       enemy.spawnPlayer();
+      calculateNextCollision(enemy, player);
       enemy.findPlayer(player.posX, player.posY);
-      calculateNextCollisionPlayer(player, enemy);
 
       if (collisionWithPlayer(enemy) && player.health > 0) {
         if (player.isAttacking === true) {
@@ -115,7 +127,6 @@ const gameLoop = (firstExec) => {
         }
         player.reciveDamage(1);
         playerSounds(player.health);
-        showHealthImage(player.health);
       } else if (player.isAttacking && !collisionWithPlayer(enemy)) {
         attackSound.play();
       }
@@ -141,13 +152,31 @@ const gameLoop = (firstExec) => {
           player.score++;
           heartSound.play();
           mapObjectsArr.splice(index, 1);
+        } else if (mapObject.type === "goldenOre") {
+          if (player.isAttacking === true) {
+            pickaxeSound.play();
+            currentOres--;
+            mapObjectsArr.splice(index, 1);
+            let mapObjectOnMine = new MapObject(
+              mapObject.posX,
+              mapObject.posY,
+              "coin"
+            );
+            mapObjectsArr.push(mapObjectOnMine);
+          }
         }
       }
     });
   }
-
   refreshScore();
-
+  let shopSelector = document.querySelector("#store");
+  if (collisionDetector(player, shop)) {
+    shopSelector.style.opacity = 1;
+    inTheShop = true;
+  } else {
+    inTheShop = false;
+    shopSelector.style.opacity = 0.2;
+  }
   if (player.health <= 0) {
     bgMusic.pause();
     bgMusic.currentTime = 0;

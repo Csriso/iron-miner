@@ -22,6 +22,8 @@ class Enemy {
     this.canMoveLeft = true;
     this.canMoveDown = true;
     this.canMoveUp = true;
+    this.swing;
+    this.swingCounter = 0;
   }
   spawnPlayer = () => {
     this.create();
@@ -29,6 +31,7 @@ class Enemy {
   findPlayer = (x, y) => {
     let difX = this.posX - x;
     let difY = this.posY - y;
+
     if (difX < 0) {
       difX *= -1;
     }
@@ -39,23 +42,98 @@ class Enemy {
     // console.log(difX, difY, this.posX, this.posY, x, y);
     // SI LA DIFERENCIA DE DISTANCIA EN X ES MAYOR A LA DE Y
     // https://media.tenor.co/images/fa3143e89d76490bdf83835cbd3d9fed/tenor.gif
+    let swingSize = 32;
+    if (this.swingCounter >= swingSize) {
+      this.swingCounter = 0;
+    }
 
-    if (difX >= difY) {
+    // if(swingCounter === 0){
+    //   if (this.posX - x < 0 && this.posY - y < 0) {
+    //     this.swing = true;
+    //   } // +,-
+    //   else if (this.posX - x > 0 && this.posY < 0){
+    //     this.swing = true;
+    //   } // -,+
+    //   else if(this.posX -x < 0 && this.posY > 0){
+    //     this.swing = false;
+    //   } // -,-
+    //   else if(this.posX -x < 0 && this.posY < 0){
+    //     this.swing = false;
+    //   }
+    // }
+
+    let difXY = difX - difY;
+    if (difXY < 0) {
+      difXY *= -1;
+    }
+    // console.log(
+    //   "DIF",
+    //   difXY,
+    //   "SWING",
+    //   this.swing,
+    //   "SWING COUNTER",
+    //   this.swingCounter,
+    //   "this.x-x",
+    //   this.posX - x,
+    //   "this.y-y",
+    //   this.posY - y
+    // );
+    if (difXY <= 32 && difXY >= 0) {
+      // -,-
+
+      if (this.swing) {
+        if (this.posX >= x && this.canMoveLeft) {
+          this.movingX = -1;
+          this.movementType = 1;
+          this.playerMoving = true;
+          this.posX -= this.speed;
+        } else if (this.posX < x && this.canMoveRight) {
+          this.movingX = 1;
+          this.movementType = 3;
+          this.playerMoving = true;
+          this.posX += this.speed;
+        }
+        this.swingCounter++;
+        if (this.swingCounter >= swingSize) {
+          this.swing = false;
+        }
+      } else if (!this.swing) {
+        if (this.posY > y && this.canMoveUp) {
+          this.movingY = -1;
+          this.movementType = 2;
+          this.playerMoving = true;
+          this.posY -= this.speed;
+        } else if (this.posY < y && this.canMoveDown) {
+          this.movingY = 1;
+          this.movementType = 0;
+          this.playerMoving = true;
+          this.posY += this.speed;
+        }
+        this.swingCounter++;
+        if (this.swingCounter >= swingSize) {
+          this.swing = true;
+        }
+      }
+    } else if (difX > difY) {
       if (this.posX >= x && this.canMoveLeft) {
+        this.movingX = -1;
         this.movementType = 1;
         this.playerMoving = true;
         this.posX -= this.speed;
       } else if (this.posX < x && this.canMoveRight) {
+        this.movingX = 1;
         this.movementType = 3;
         this.playerMoving = true;
         this.posX += this.speed;
       }
     } else if (difX <= difY) {
       if (this.posY > y && this.canMoveUp) {
+        this.movingY = -1;
         this.movementType = 2;
         this.playerMoving = true;
         this.posY -= this.speed;
       } else if (this.posY < y && this.canMoveDown) {
+        this.movingY = 1;
         this.movementType = 0;
         this.playerMoving = true;
         this.posY += this.speed;
@@ -92,7 +170,7 @@ class Enemy {
     let atlasWidth = tileWidth;
     let mapIndex = 0;
 
-    // CAMBIO TAMAÑO DE ATLAS Y DE OUTPUT DEL PERSONAJE SEGUN SE MUEVE O SE QUEDA QUIETO (16px QUIETO 17px MOVIENDOSE)
+    // CAMBIO TAMAÑO DE ATLAS Y DE OUTPUT DEL PERSONAJE SEGUN SE MUEVE O SE QUEDA QUIETO
     if (this.playerMoving === true && this.isAttacking === false) {
       atlasHeight = 17;
       atlasWidth = 96;
