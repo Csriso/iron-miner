@@ -11,7 +11,7 @@ let arrEnemies = [];
 let mapCollisions = [];
 let mapObjectsArr = [];
 let enemyCount = 1;
-let maxEnemies = 2;
+let maxEnemies = 1;
 let lastAttackSound = 0;
 let timeCounter = 0;
 let intervalCounter;
