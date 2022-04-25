@@ -18,6 +18,10 @@ class Enemy {
     this.isAttacking = false;
     this.difXdifYcounter = 0;
     this.type = type;
+    this.canMoveRight = true;
+    this.canMoveLeft = true;
+    this.canMoveDown = true;
+    this.canMoveUp = true;
   }
   spawnPlayer = () => {
     this.create();
@@ -37,21 +41,21 @@ class Enemy {
     // https://media.tenor.co/images/fa3143e89d76490bdf83835cbd3d9fed/tenor.gif
 
     if (difX >= difY) {
-      if (this.posX >= x) {
+      if (this.posX >= x && this.canMoveLeft) {
         this.movementType = 1;
         this.playerMoving = true;
         this.posX -= this.speed;
-      } else if (this.posX < x) {
+      } else if (this.posX < x && this.canMoveRight) {
         this.movementType = 3;
         this.playerMoving = true;
         this.posX += this.speed;
       }
     } else if (difX <= difY) {
-      if (this.posY > y) {
+      if (this.posY > y && this.canMoveUp) {
         this.movementType = 2;
         this.playerMoving = true;
         this.posY -= this.speed;
-      } else if (this.posY < y) {
+      } else if (this.posY < y && this.canMoveDown) {
         this.movementType = 0;
         this.playerMoving = true;
         this.posY += this.speed;

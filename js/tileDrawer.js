@@ -16,7 +16,7 @@ drawGrass = () => {
   let mapRows = 40;
   let mapHeight = mapRows * tileSize;
   let mapWidth = mapCols * tileSize;
-  let level1Map = arrTileData[3].data;
+  let level1Map = arrTileData[0].data;
   let mapIndex = 0;
   let sourceX = 0;
   let sourceY = 0;
@@ -59,7 +59,7 @@ drawRocks = (param) => {
   let mapRows = 40;
   let mapHeight = mapRows * tileSize;
   let mapWidth = mapCols * tileSize;
-  let level1Map = arrTileData[2].data;
+  let level1Map = arrTileData[1].data;
   let mapIndex = 0;
   let sourceX = 0;
   let sourceY = 0;

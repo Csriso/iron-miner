@@ -19,6 +19,10 @@ class Player {
     this.kills = 0;
     this.score = 0;
     this.coins = 0;
+    this.canMoveRight = true;
+    this.canMoveLeft = true;
+    this.canMoveDown = true;
+    this.canMoveUp = true;
   }
   spawnPlayer = () => {
     this.create();
@@ -27,13 +31,29 @@ class Player {
     this.health -= damage;
   };
   keepMoving = () => {
-    if (this.movingX === 1 && this.movingY === 0) {
+    if (
+      this.movingX === 1 &&
+      this.movingY === 0 &&
+      this.canMoveRight === true
+    ) {
       this.posX += this.speed;
-    } else if (this.movingX === -1 && this.movingY === 0) {
+    } else if (
+      this.movingX === -1 &&
+      this.movingY === 0 &&
+      this.canMoveLeft === true
+    ) {
       this.posX -= this.speed;
-    } else if (this.movingY === 1 && this.movingX === 0) {
+    } else if (
+      this.movingY === 1 &&
+      this.movingX === 0 &&
+      this.canMoveDown === true
+    ) {
       this.posY += this.speed;
-    } else if (this.movingY === -1 && this.movingX === 0) {
+    } else if (
+      this.movingY === -1 &&
+      this.movingX === 0 &&
+      this.canMoveUp === true
+    ) {
       this.posY -= this.speed;
     }
   };

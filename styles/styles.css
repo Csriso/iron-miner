@@ -25,6 +25,8 @@ body {
   font-family: pixelFont;
   font-size: 28px;
   color: white;
+  text-shadow: 2px 2px 5px black;
+
 }
 
 .container-left .table h3, .container-left .table p{
@@ -53,6 +55,7 @@ body {
   text-align: center;
   margin: 0 auto;
   z-index: 3;
+  color:white;
 }
 .canvas-container {
   pointer-events: all;
@@ -200,7 +203,18 @@ canvas {
   align-content: center;
   height: 100%;
 }
-
+.textRightScore{
+  font-size: 40px;  
+  margin: 0;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 5px black;
+}
+.score-text{
+  margin-top: 130px;
+}
+.storeClass{
+  margin-top: 50px;
+}
 @font-face {
   font-family: pixelFont;
   src: url(../assets/dpcomic.ttf);

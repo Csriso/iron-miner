@@ -15,16 +15,24 @@ let maxEnemies = 3;
 let lastAttackSound = 0;
 let timeCounter = 0;
 let intervalCounter;
-let collisionBoolean = false;
 let collisionCount = 0;
 let collisionDetected;
+let nextCollision = false;
 
 let fps = 60;
 
 createEvents();
 
+const refreshScore = () => {
+  let scoreSelector = document.querySelector("#scoreViewer");
+  let killsSelector = document.querySelector("#killsViewer");
+  let coinsSelector = document.querySelector("#coinsViewer");
+  scoreSelector.innerText = player.score;
+  killsSelector.innerText = player.kills;
+  coinsSelector.innerText = player.coins;
+};
+
 const restartGame = () => {
-  collisionBoolean = false;
   isGameOn = true;
   soundPlaying = "";
   player = new Player();
@@ -56,7 +64,12 @@ const startGame = () => {
 };
 
 const gameLoop = (firstExec) => {
+  player.canMoveUp = true;
+  player.canMoveDown = true;
+  player.canMoveLeft = true;
+  player.canMoveRight = true;
   collisionCount = 0;
+  nextCollision = false;
   if (firstExec === 1) {
     drawAllTiles(1);
   } else {
@@ -64,23 +77,16 @@ const gameLoop = (firstExec) => {
   }
   player.spawnPlayer();
   mapCollisions.forEach((collisionObj) => {
-    if (collisionDetector(player, collisionObj)) {
-      collisionCount++;
-    } else {
-      collisionBoolean = false;
-    }
+    calculateNextCollisionPlayer(player, collisionObj);
   });
-  if (collisionCount >= 1) {
-    collisionBoolean = true;
-  }
 
-  if (collisionBoolean === false) {
-    player.keepMoving();
-  }
   if (enemyCount < maxEnemies) {
-    let randomWidth = randomNumber(16, canvas.width - 16);
-    let randomHeight = randomNumber(16, canvas.width - 16);
-    const enemy = new Enemy(randomWidth, randomHeight, "normal");
+    let randomHeightAndWidth = randonHeightAndWidth();
+    const enemy = new Enemy(
+      randomHeightAndWidth.width,
+      randomHeightAndWidth.height,
+      "normal"
+    );
     arrEnemies.push(enemy);
     enemyCount++;
   }
@@ -88,6 +94,8 @@ const gameLoop = (firstExec) => {
     arrEnemies.forEach((enemy, index) => {
       enemy.spawnPlayer();
       enemy.findPlayer(player.posX, player.posY);
+      calculateNextCollisionPlayer(player, enemy);
+
       if (collisionWithPlayer(enemy) && player.health > 0) {
         if (player.isAttacking === true) {
           attackSoundSelector();
@@ -112,7 +120,11 @@ const gameLoop = (firstExec) => {
         attackSound.play();
       }
     });
+  } else if (player.isAttacking) {
+    attackSound.play();
   }
+  player.keepMoving();
+
   showHealthImage(player.health);
 
   if (mapObjectsArr.length !== 0) {
@@ -133,6 +145,8 @@ const gameLoop = (firstExec) => {
       }
     });
   }
+
+  refreshScore();
 
   if (player.health <= 0) {
     bgMusic.pause();
