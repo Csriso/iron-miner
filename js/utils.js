@@ -18,7 +18,9 @@ const randonHeightAndWidth = () => {
   return { height: randomHeight, width: randomWidth };
 };
 
-const showHealthImage = (health) => {
+const showHealthImage = (health, maxHealth) => {
+  ///HACER MAÑANA
+  let step = player.maxHealth / 14;
   let healthImgToChange = document.querySelector("#health-img");
   let arrImages = [4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
   let toFind = Math.floor((health * 56) / 100);

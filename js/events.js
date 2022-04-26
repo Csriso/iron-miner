@@ -116,11 +116,14 @@ let createEvents = () => {
   });
 
   let itemArmorSelector = document.querySelector("#item-armor");
-  itemArmorSelector.addEventListener("click", buyBoots);
+  itemArmorSelector.addEventListener("click", buyArmor);
 
   let itemSwordSelector = document.querySelector("#item-sword");
-  itemSwordSelector.addEventListener("click", buyArmor);
+  itemSwordSelector.addEventListener("click", buySword);
 
   let itemBootsSelector = document.querySelector("#item-boots");
-  itemBootsSelector.addEventListener("click", buySword);
+  itemBootsSelector.addEventListener("click", buyBoots);
+
+  let itemPotionSelector = document.querySelector("#item-potion");
+  itemPotionSelector.addEventListener("click", buyPotion);
 };

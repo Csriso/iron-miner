@@ -9,6 +9,11 @@ const setAllSoundsVolume = (volume) => {
   gruntPlayer40.volume = volume;
   gruntPlayer20.volume = volume;
   playerDeadSound.volume = volume;
+  coinSound.volume = volume;
+  heartSound.volume = volume;
+  pickaxeSound.volume = volume;
+  storeSound.volume = volume;
+  storeInSound.volume = volume;
 };
 const attackSoundSelector = () => {
   if (timeCounter % 2 === 0) {

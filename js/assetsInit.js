@@ -24,7 +24,10 @@ let heartSound = new Audio("../assets/sounds/heart.wav");
 heartSound.preload = "auto";
 let pickaxeSound = new Audio("../assets/sounds/pickaxe.wav");
 pickaxeSound.preload = "auto";
-
+let storeSound = new Audio("../assets/sounds/store.wav");
+storeSound.preload = "auto";
+let storeInSound = new Audio("../assets/sounds/storein.wav");
+storeInSound.preload = "auto";
 // let attackHit = new Audio("../assets/title.wav");
 
 //IDLE CHARACTER

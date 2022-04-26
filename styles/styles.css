@@ -212,17 +212,16 @@ canvas {
 .score-text{
   margin-top: 130px;
 }
-.storeClass{
-  margin-top: 50px;
-}
 .items-shop{
   font-size: 28px;
   margin: 0;
   color: red;
+
 }
 .items-shop p {
   margin: 5px;
   padding: 15px;
+  width: 150px;
   background-color: white;
   border-radius: 20px;
 }
@@ -233,8 +232,32 @@ canvas {
   justify-content: center;
   justify-items: center;
   align-content: center;
+  border-radius: 20px;
+  background-color: white;
+  margin-bottom: 10px;
+  width: 400px;
+  -ms-user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+   user-select:none;
+}
+#item-shop p{
+  -ms-user-select:none;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+   user-select:none;
+}
+.flex-separator{
+  width: 20px;
 }
 
+.item-shop img{
+  width: 50px;
+}
 @font-face {
   font-family: pixelFont;
   src: url(../assets/dpcomic.ttf);

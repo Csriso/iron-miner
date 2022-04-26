@@ -8,7 +8,7 @@ class Player {
     this.posY = 100;
     this.w = 16;
     this.h = 16;
-    this.speed = 3;
+    this.speed = 1;
     this.totalFrame = 0;
     this.lastFrame = 0;
     this.playerMoving = false;
@@ -18,7 +18,7 @@ class Player {
     this.isAttacking = false;
     this.kills = 0;
     this.score = 0;
-    this.coins = 0;
+    this.coins = 5000;
     this.canMoveRight = true;
     this.canMoveLeft = true;
     this.canMoveDown = true;

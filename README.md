@@ -16,23 +16,23 @@
 
 ## MVP
 
-- Add basic collisions. DONE
+- Add basic collisions. ✔️
 
-- Add enemies that spawn at randomly locations. DONE
+- Add enemies that spawn at randomly locations. ✔️
 
-- Enemies follow you and can attack you. DONE
+- Enemies follow you and can attack you. ✔️
 
-- Player can attack enemies and mine ores. DONE
+- Player can attack enemies and mine ores. ✔️
  
-- Player animations of idle, walk and attack. DONE
+- Player animations of idle, walk and attack. ✔️
  
-- Enemies animations of walk. DONE
+- Enemies animations of walk. ✔️
  
-- Enemies run to your position to damage you. DONE
+- Enemies run to your position to damage you. ✔️
  
-- Iron ores spawn at random location and you get coins if you mine them. DONE
+- Iron ores spawn at random location and you get coins if you mine them. ✔️
  
-- Sounds/music. DONE
+- Sounds/music. ✔️
 
 ## Backlog
 

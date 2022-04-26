@@ -18,9 +18,9 @@ let lastAttackSound = 0;
 let timeCounter = 0;
 let intervalCounter;
 let collisionCount = 0;
-let collisionDetected;
 let nextCollision = false;
 let inTheShop = false;
+let firstEntranceShop = true;
 let difficultyLevelEnemyCount = 0;
 let increaseDifficultyEnemyCount = false;
 let increaseDifficultyEnemyHP = false;
@@ -44,7 +44,6 @@ const refreshScore = () => {
 const restartGame = () => {
   // RESET ALL VARS
   isGameOn = true;
-  game;
   songPlaying = "";
   musicPlaying = true;
   player = new Player();
@@ -59,7 +58,6 @@ const restartGame = () => {
   timeCounter = 0;
   intervalCounter;
   collisionCount = 0;
-  collisionDetected;
   nextCollision = false;
   inTheShop = false;
   difficultyLevelEnemyCount = 0;
@@ -92,6 +90,7 @@ const checkCoinsShop = () => {
   let bodyArmorPrice = document.querySelector("#body-armor .price").innerText;
   let swordPrice = document.querySelector("#sword .price").innerText;
   let bootsPrice = document.querySelector("#boots .price").innerText;
+  let potionPrice = document.querySelector("#potion .price").innerText;
   let coins = player.coins;
   if (coins >= bodyArmorPrice) {
     document.querySelector("#item-armor").style.color = "black";
@@ -107,6 +106,11 @@ const checkCoinsShop = () => {
     document.querySelector("#item-boots").style.color = "black";
   } else {
     document.querySelector("#item-boots").style.color = "red";
+  }
+  if (coins >= potionPrice) {
+    document.querySelector("#item-potion").style.color = "black";
+  } else {
+    document.querySelector("#item-potion").style.color = "red";
   }
 };
 
@@ -161,7 +165,6 @@ const gameLoop = (firstExec) => {
     );
     currentEnemies++;
     arrEnemies.push(enemy);
-    console.log(hpDifficulty * 100);
   }
 
   if (arrEnemies.length !== 0) {
@@ -178,8 +181,8 @@ const gameLoop = (firstExec) => {
         if (enemy === enemySec || index === index2) {
           return;
         }
-        calculateNextCollision(enemy, enemySec);
-        calculateNextCollision(enemySec, enemy);
+        // calculateNextCollision(enemy, enemySec);
+        // calculateNextCollision(enemySec, enemy);
       });
       enemy.findPlayer(player.posX, player.posY);
       if (collisionWithPlayer(enemy) && player.health > 0) {
@@ -209,7 +212,7 @@ const gameLoop = (firstExec) => {
     attackSound.play();
   }
 
-  showHealthImage(player.health);
+  showHealthImage(player.health, player.maxHealth);
 
   if (mapObjectsArr.length !== 0) {
     mapObjectsArr.forEach((mapObject, index) => {
@@ -255,11 +258,16 @@ const gameLoop = (firstExec) => {
   refreshScore();
   let shopSelector = document.querySelector("#store");
   if (collisionDetector(player, shop)) {
+    if (firstEntranceShop) {
+      storeInSound.play();
+    }
     shopSelector.style.opacity = 1;
     inTheShop = true;
+    firstEntranceShop = false;
   } else {
+    firstEntranceShop = true;
     inTheShop = false;
-    shopSelector.style.opacity = 0.2;
+    shopSelector.style.opacity = 0.5;
   }
   checkCoinsShop();
 
