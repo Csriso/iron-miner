@@ -82,7 +82,5 @@ const heartSprite = new Image();
 heartSprite.src = "../assets/heart.png";
 const goldenOreSprite = new Image();
 goldenOreSprite.src = "../assets/goldenore.png";
-// const goldenOreSprite = new Image();
-// goldenOreSprite.src = "../assets/goldenore.png";
 const coinSprite = new Image();
 coinSprite.src = "../assets/coin.png";

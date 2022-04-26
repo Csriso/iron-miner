@@ -1,8 +1,7 @@
 class Enemy {
-  constructor(posX, posY, type) {
+  constructor(posX, posY, type, maxHP) {
     this.direction = 0;
-    this.moving = false;
-    this.health = 100;
+    this.health = maxHP;
     this.stamina = 100;
     this.posX = posX;
     this.posY = posY;
@@ -29,40 +28,10 @@ class Enemy {
   spawnPlayer = () => {
     this.create();
   };
-  findPlayerV2 = (playerX, playerY) => {
-    let difX = this.posX - playerX;
-    let difY = this.posY - playerY;
-    let stepsize = 16;
-    if (difX < 0 && difY < 0) {
-      // ENEMY  RIGHT  DOWN+,+
-      let stepsX = difX / stepsize;
-      let stepsY = difY / stepsize;
-    } else if (difX < 0 && difY > 0) {
-      // ENEMY  LEFT DOWN +,-
-    } else if (difX > 0 && difY < 0) {
-      // ENEMY  RIGHT UP -, +
-    } else if (difX > 0 && difY > 0) {
-      // ENEMY  LEFT  UP-,-
-    } else if (difX === 0 && difY > 0) {
-      // ONLY DOWN
-    } else if (difX === 0 && difY < 0) {
-      // ONLY UP
-    } else if (difX > 0 && difY === 0) {
-      // ONLY RIGHT
-    } else if (difX < 0 && difY === 0) {
-      // ONLY LEFT
-    }
-  };
 
   findPlayer = (x, y) => {
     let difX = Math.abs(this.posX - x);
     let difY = Math.abs(this.posY - y);
-    // if (difX < 0) {
-    //   difX *= -1;
-    // }
-    // if (difY < 0) {
-    //   difY *= -1;
-    // }
 
     // console.log(difX, difY, this.posX, this.posY, x, y);
     // SI LA DIFERENCIA DE DISTANCIA EN X ES MAYOR A LA DE Y
@@ -71,36 +40,12 @@ class Enemy {
     if (this.swingCounter >= swingSize) {
       this.swingCounter = 0;
     }
-    // -,-
-    // if (this.posX - x < 0 && this.posY - y < 0) {
-    //   this.swing = true;
-    // } // +,-
-    // else if (this.posX - x > 0 && this.posY < 0){
-    //   this.swing = true;
-    // } // -,+
-    // else if(this.posX -x < 0 && this.posY > 0){
-    //   this.swing = false;
-    // } // -,-
-    // else if(this.posX -x > 0 && this.posY > 0){
-    //   this.swing = false;
-    // }
 
     let difXY = Math.abs(difX - difY);
     if (difXY < 0) {
       difXY *= -1;
     }
-    console.log(
-      "DIF",
-      difXY,
-      "SWING",
-      this.swing,
-      "SWING COUNTER",
-      this.swingCounter,
-      "this.x-x",
-      this.posX - x,
-      "this.y-y",
-      this.posY - y
-    );
+
     if (difXY >= 32) {
       this.swingHasStarted = false;
     }
@@ -153,6 +98,7 @@ class Enemy {
         this.posX += this.speed;
       }
       this.swingHasStarted = false;
+      this.swingCounter = 0;
     } else if (difX < difY) {
       if (this.posY > y && this.canMoveUp) {
         this.movingY = -1;
@@ -166,8 +112,10 @@ class Enemy {
         this.posY += this.speed;
       }
       this.swingHasStarted = false;
+      this.swingCounter = 0;
     }
   };
+
   create = () => {
     let imgToUse;
     if (this.movementType === 0 && this.playerMoving === true) {

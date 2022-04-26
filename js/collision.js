@@ -27,6 +27,34 @@ let collisionDetector = (first, second) => {
   }
 };
 
+let collisionDetectorWithHighRange = (first, second) => {
+  if (
+    first.posX < second.posX + second.w + 4 &&
+    first.posX + first.w + 4 > second.posX &&
+    first.posY < second.posY + second.h + 4 &&
+    first.h + 4 + first.posY > second.posY
+  ) {
+    // collision detected!
+    return true;
+  } else {
+    // no collision
+    return false;
+  }
+};
+let collisionDetectorWithSmallRange = (first, second) => {
+  if (
+    first.posX < second.posX + second.w - 4 &&
+    first.posX + first.w - 4 > second.posX &&
+    first.posY < second.posY + second.h - 4 &&
+    first.h - 4 + first.posY > second.posY
+  ) {
+    // collision detected!
+    return true;
+  } else {
+    // no collision
+    return false;
+  }
+};
 let collisionDetectorCoords = (firstX, firstY, firstW, firstH, second) => {
   if (
     firstX < second.posX + second.w &&
@@ -43,7 +71,7 @@ let collisionDetectorCoords = (firstX, firstY, firstW, firstH, second) => {
 };
 
 let calculateNextCollision = (first, second) => {
-  if (first.movingX === 1 && first.movingY === 0) {
+  if (first.movingX === 1 && first.movingY === 0 && first.canMoveRight) {
     if (
       collisionDetectorCoords(
         first.posX + first.speed,
@@ -55,7 +83,7 @@ let calculateNextCollision = (first, second) => {
     ) {
       first.canMoveRight = false;
     }
-  } else if (first.movingX === -1 && first.movingY === 0) {
+  } else if (first.movingX === -1 && first.movingY === 0 && first.canMoveLeft) {
     if (
       collisionDetectorCoords(
         first.posX - first.speed,
@@ -67,7 +95,7 @@ let calculateNextCollision = (first, second) => {
     ) {
       first.canMoveLeft = false;
     }
-  } else if (first.movingX === 0 && first.movingY === 1) {
+  } else if (first.movingX === 0 && first.movingY === 1 && first.canMoveDown) {
     if (
       collisionDetectorCoords(
         first.posX,
@@ -79,7 +107,7 @@ let calculateNextCollision = (first, second) => {
     ) {
       first.canMoveDown = false;
     }
-  } else if (first.movingX === 0 && first.movingY === -1) {
+  } else if (first.movingX === 0 && first.movingY === -1 && first.canMoveUp) {
     if (
       collisionDetectorCoords(
         first.posX,

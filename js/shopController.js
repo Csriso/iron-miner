@@ -1,12 +1,19 @@
-let buyBoots = () => {
-  if (inTheShop && player.coins > level * 10) {
-  }
-};
 let buyArmor = () => {
-  if (inTheShop && player.coins > level * 10) {
+  let level = document.querySelector("#item-armor .item-next-lvl").innerText;
+
+  if (inTheShop) {
+    console.log("IN");
   }
 };
 let buySword = () => {
-  if (inTheShop && player.coins > level * 10) {
+  let level = document.querySelector("#item-sword .item-next-lvl").innerText;
+  if (inTheShop) {
+    console.log("IN");
+  }
+};
+let buyBoots = () => {
+  let level = document.querySelector("#item-boots .item-next-lvl").innerText;
+  if (inTheShop) {
+    console.log("IN");
   }
 };

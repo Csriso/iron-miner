@@ -10,8 +10,10 @@ let player = new Player();
 let arrEnemies = [];
 let mapCollisions = [];
 let mapObjectsArr = [];
-let enemyCount = 1;
-let maxEnemies = 1;
+let maxOres = 2;
+let currentOres = 0;
+let currentEnemies = 0;
+let maxEnemies = 3;
 let lastAttackSound = 0;
 let timeCounter = 0;
 let intervalCounter;
@@ -19,11 +21,11 @@ let collisionCount = 0;
 let collisionDetected;
 let nextCollision = false;
 let inTheShop = false;
-let maxOres = 2;
-let currentOres = 0;
-let currentEnemies = 0;
-const shop = { posX: 48, posY: 64, w: 48, h: 32 };
+let difficultyLevelEnemyCount = 0;
+let increaseDifficultyEnemyCount = false;
+let increaseDifficultyEnemyHP = false;
 
+const shop = { posX: 48, posY: 64, w: 48, h: 32 };
 let fps = 60;
 
 createEvents();
@@ -32,18 +34,36 @@ const refreshScore = () => {
   let scoreSelector = document.querySelector("#scoreViewer");
   let killsSelector = document.querySelector("#killsViewer");
   let coinsSelector = document.querySelector("#coinsViewer");
+  let healthSelector = document.querySelector("#healthViewer");
   scoreSelector.innerText = player.score;
   killsSelector.innerText = player.kills;
   coinsSelector.innerText = player.coins;
+  healthSelector.innerText = player.maxHealth;
 };
 
 const restartGame = () => {
+  // RESET ALL VARS
   isGameOn = true;
-  soundPlaying = "";
+  game;
+  songPlaying = "";
+  musicPlaying = true;
   player = new Player();
   arrEnemies = [];
-  enemyCount = 0;
-  maxEnemies = 2;
+  mapCollisions = [];
+  mapObjectsArr = [];
+  maxOres = 2;
+  currentOres = 0;
+  currentEnemies = 0;
+  maxEnemies = 3;
+  lastAttackSound = 0;
+  timeCounter = 0;
+  intervalCounter;
+  collisionCount = 0;
+  collisionDetected;
+  nextCollision = false;
+  inTheShop = false;
+  difficultyLevelEnemyCount = 0;
+  increaseDifficultyEnemyCount = false;
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
   document.querySelector("#gameoverBtn").style.display = "none";
@@ -68,6 +88,28 @@ const startGame = () => {
   // bgMusic.volume = 0.1;
 };
 
+const checkCoinsShop = () => {
+  let bodyArmorPrice = document.querySelector("#body-armor .price").innerText;
+  let swordPrice = document.querySelector("#sword .price").innerText;
+  let bootsPrice = document.querySelector("#boots .price").innerText;
+  let coins = player.coins;
+  if (coins >= bodyArmorPrice) {
+    document.querySelector("#item-armor").style.color = "black";
+  } else {
+    document.querySelector("#item-armor").style.color = "red";
+  }
+  if (coins >= swordPrice) {
+    document.querySelector("#item-sword").style.color = "black";
+  } else {
+    document.querySelector("#item-sword").style.color = "red";
+  }
+  if (coins >= bootsPrice) {
+    document.querySelector("#item-boots").style.color = "black";
+  } else {
+    document.querySelector("#item-boots").style.color = "red";
+  }
+};
+
 const gameLoop = (firstExec) => {
   player.canMoveUp = true;
   player.canMoveDown = true;
@@ -85,35 +127,67 @@ const gameLoop = (firstExec) => {
     calculateNextCollision(player, collisionObj);
   });
 
+  if (increaseDifficultyEnemyCount === true) {
+    maxEnemies *= 2;
+    increaseDifficultyEnemyCount = false;
+  }
+
+  if (
+    difficultyLevelEnemyCount !== Math.floor(player.score / 200) &&
+    Math.floor(player.score / 200) <= 5
+  ) {
+    difficultyLevelEnemyCount = Math.floor(player.score / 200);
+    increaseDifficultyEnemyCount = true;
+  }
+
   if (currentOres < maxOres) {
     currentOres++;
     let firstOre = new MapObject(randomWidth(), randomHeight(), "goldenOre");
     mapObjectsArr.push(firstOre);
   }
-  console.log(currentEnemies, maxEnemies);
+  let hpDifficulty = 0;
   if (currentEnemies < maxEnemies) {
     let randomHeightAndWidth = randonHeightAndWidth();
+    if (difficultyLevelEnemyCount === 0) {
+      hpDifficulty = 1;
+    } else {
+      hpDifficulty = difficultyLevelEnemyCount;
+    }
     const enemy = new Enemy(
       randomHeightAndWidth.width,
       randomHeightAndWidth.height,
-      "normal"
+      "normal",
+      hpDifficulty * 100
     );
     currentEnemies++;
     arrEnemies.push(enemy);
+    console.log(hpDifficulty * 100);
   }
 
   if (arrEnemies.length !== 0) {
     arrEnemies.forEach((enemy, index) => {
       enemy.spawnPlayer();
-      calculateNextCollision(enemy, player);
-      enemy.findPlayer(player.posX, player.posY);
 
+      // COLLISIONS PLAYER-ENEMY ENEMY-PLAYER
+      calculateNextCollision(enemy, player);
+      calculateNextCollision(player, enemy);
+      //
+
+      //COLLISIONS BETWEEN ENEMIES
+      arrEnemies.forEach((enemySec, index2) => {
+        if (enemy === enemySec || index === index2) {
+          return;
+        }
+        calculateNextCollision(enemy, enemySec);
+        calculateNextCollision(enemySec, enemy);
+      });
+      enemy.findPlayer(player.posX, player.posY);
       if (collisionWithPlayer(enemy) && player.health > 0) {
         if (player.isAttacking === true) {
           attackSoundSelector();
           if (enemy.health <= 0) {
             player.kills++;
-            enemyCount--;
+            currentEnemies--;
             arrEnemies.splice(index, 1);
             let mapObjectOnKill;
             if (player.kills % 5 === 0) {
@@ -123,7 +197,7 @@ const gameLoop = (firstExec) => {
             }
             mapObjectsArr.push(mapObjectOnKill);
           }
-          enemy.health -= 50;
+          enemy.health -= player.damage;
         }
         player.reciveDamage(1);
         playerSounds(player.health);
@@ -134,25 +208,33 @@ const gameLoop = (firstExec) => {
   } else if (player.isAttacking) {
     attackSound.play();
   }
-  player.keepMoving();
 
   showHealthImage(player.health);
 
   if (mapObjectsArr.length !== 0) {
     mapObjectsArr.forEach((mapObject, index) => {
       mapObject.spawnObject();
-      if (collisionDetector(player, mapObject)) {
-        if (mapObject.type === "coin") {
+
+      if (mapObject.type === "coin") {
+        if (collisionDetectorWithSmallRange(player, mapObject)) {
           coinSound.play();
           player.score += 10;
           player.coins++;
           mapObjectsArr.splice(index, 1);
-        } else if (mapObject.type === "heart") {
+        }
+      }
+      if (mapObject.type === "heart") {
+        if (collisionDetectorWithSmallRange(player, mapObject)) {
           player.health += 25;
           player.score++;
           heartSound.play();
           mapObjectsArr.splice(index, 1);
-        } else if (mapObject.type === "goldenOre") {
+        }
+      }
+
+      if (mapObject.type === "goldenOre") {
+        calculateNextCollision(player, mapObject);
+        if (collisionDetectorWithHighRange(player, mapObject)) {
           if (player.isAttacking === true) {
             pickaxeSound.play();
             currentOres--;
@@ -168,6 +250,8 @@ const gameLoop = (firstExec) => {
       }
     });
   }
+
+  //SHOP SCORE
   refreshScore();
   let shopSelector = document.querySelector("#store");
   if (collisionDetector(player, shop)) {
@@ -177,6 +261,9 @@ const gameLoop = (firstExec) => {
     inTheShop = false;
     shopSelector.style.opacity = 0.2;
   }
+  checkCoinsShop();
+
+  //PLAYER DIES
   if (player.health <= 0) {
     bgMusic.pause();
     bgMusic.currentTime = 0;
@@ -190,6 +277,9 @@ const gameLoop = (firstExec) => {
     document.querySelector("#nameLogo").style.display = "block";
     document.querySelector("#gameoverBtn").style.display = "block";
   }
+
+  // MOVE THE PLAYER AFTER CHECKING ALL COLLISIONS FIRST
+  player.keepMoving();
 
   if (isGameOn) {
     setTimeout(function () {

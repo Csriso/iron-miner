@@ -114,4 +114,13 @@ let createEvents = () => {
       startGame();
     });
   });
+
+  let itemArmorSelector = document.querySelector("#item-armor");
+  itemArmorSelector.addEventListener("click", buyBoots);
+
+  let itemSwordSelector = document.querySelector("#item-sword");
+  itemSwordSelector.addEventListener("click", buyArmor);
+
+  let itemBootsSelector = document.querySelector("#item-boots");
+  itemBootsSelector.addEventListener("click", buySword);
 };

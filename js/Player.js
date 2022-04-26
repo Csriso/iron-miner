@@ -1,8 +1,8 @@
 class Player {
   constructor() {
     this.direction = 0;
-    this.moving = false;
     this.health = 100;
+    this.maxHealth = 100;
     this.stamina = 100;
     this.posX = 100;
     this.posY = 100;
@@ -24,6 +24,7 @@ class Player {
     this.canMoveDown = true;
     this.canMoveUp = true;
     this.attackDamage = 0;
+    this.damage = 50;
   }
   spawnPlayer = () => {
     this.create();
