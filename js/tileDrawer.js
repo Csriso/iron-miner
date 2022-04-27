@@ -5,7 +5,7 @@ drawAllTiles = (param) => {
 
 drawGrass = () => {
   const tileAtlas = new Image();
-  tileAtlas.src = "../assets/serene.png";
+  tileAtlas.src = "./assets/serene.png";
   let tileSize = 16;
   let tileOutputSize = 1;
   let updatedTileSize = tileSize * tileOutputSize;
@@ -46,7 +46,7 @@ drawGrass = () => {
 };
 drawRocks = (param) => {
   const tileAtlas = new Image();
-  tileAtlas.src = "../assets/serene.png";
+  tileAtlas.src = "./assets/serene.png";
   let tileSize = 16;
   let tileOutputSize = 1;
   let updatedTileSize = tileSize * tileOutputSize;

@@ -11,9 +11,9 @@ let buyArmor = () => {
     priceSelector.innerText = priceSelector.innerText * 2;
     if (Number(levelSelector.innerText) <= 5) {
       imgSelector.src =
-        "../assets/items/armor/lvl" + levelSelector.innerText + ".png";
+        "./assets/items/armor/lvl" + levelSelector.innerText + ".png";
     }
-    console.log("../assets/items/armor/lvl" + levelSelector.innerText + ".png");
+    console.log("./assets/items/armor/lvl" + levelSelector.innerText + ".png");
     levelSelector.innerText = Number(levelSelector.innerText) + 1;
     // console.log("MAXVIDA", player.maxHealth);
   }
@@ -30,7 +30,7 @@ let buySword = () => {
     priceSelector.innerText = priceSelector.innerText * 2;
     if (Number(levelSelector.innerText) <= 13) {
       imgSelector.src =
-        "../assets/items/sword/lvl" + levelSelector.innerText + ".png";
+        "./assets/items/sword/lvl" + levelSelector.innerText + ".png";
     }
     levelSelector.innerText = Number(levelSelector.innerText) + 1;
     // console.log("DAÑO", player.damage);
@@ -48,7 +48,7 @@ let buyBoots = () => {
     priceSelector.innerText = priceSelector.innerText * 2;
     if (Number(levelSelector.innerText) <= 5) {
       imgSelector.src =
-        "../assets/items/boots/lvl" + levelSelector.innerText + ".png";
+        "./assets/items/boots/lvl" + levelSelector.innerText + ".png";
     }
     levelSelector.innerText = Number(levelSelector.innerText) + 1;
     // console.log("SPEED", player.speed);
