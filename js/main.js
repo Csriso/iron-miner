@@ -135,19 +135,20 @@ const gameLoop = (firstExec) => {
     calculateNextCollision(player, collisionObj);
   });
 
-  if (increaseDifficultyEnemyCount === true) {
-    maxEnemies *= 2;
-    increaseDifficultyEnemyCount = false;
-  }
+  // if (increaseDifficultyEnemyCount === true) {
+  //   maxEnemies *= 2;
+  //   increaseDifficultyEnemyCount = false;
+  // }
 
-  if (
-    difficultyLevelEnemyCount !== Math.floor(player.score / 200) &&
-    Math.floor(player.score / 200) <= 5
-  ) {
-    difficultyLevelEnemyCount = Math.floor(player.score / 200);
-    increaseDifficultyEnemyCount = true;
-  }
+  // if (
+  //   difficultyLevelEnemyCount !== Math.floor(player.score / 200) &&
+  //   Math.floor(player.score / 200) <= 5
+  // ) {
+  //   difficultyLevelEnemyCount = Math.floor(player.score / 200);
+  //   increaseDifficultyEnemyCount = true;
+  // }
 
+  // GENERATE ORES
   if (currentOres < maxOres && generateWave === true) {
     while (currentOres < maxOres) {
       let randomHeightAndWidth = randomHeightAndWidthWithPlayer(player);
@@ -162,31 +163,40 @@ const gameLoop = (firstExec) => {
     }
   }
 
-  //DIFFICULTY
-  let hpDifficulty = 0;
+  //DIFFICULTY - GENERATE NEW WAVE
   if (currentEnemies < maxEnemies && generateWave === true) {
     while (currentEnemies < maxEnemies) {
-      let randomHeightAndWidth = randomHeightAndWidthWithPlayer(player);
-      if (difficultyLevelEnemyCount === 0) {
-        hpDifficulty = 1;
+      let randomHeightAndWidth = generateOnBorders();
+      if (waveCounter === 0) {
+        const boss = new Boss(
+          randomHeightAndWidth.width,
+          randomHeightAndWidth.height,
+          "golem",
+          waveCounter * 1000
+        );
+        currentEnemies = maxEnemies;
+        arrEnemies.push(boss);
       } else {
-        hpDifficulty = difficultyLevelEnemyCount;
+        const enemy = new Enemy(
+          randomHeightAndWidth.width,
+          randomHeightAndWidth.height,
+          "normal",
+          waveCounter * 100
+        );
+        arrEnemies.push(enemy);
       }
-      const enemy = new Enemy(
-        randomHeightAndWidth.width,
-        randomHeightAndWidth.height,
-        "normal",
-        waveCounter * 100
-      );
       currentEnemies++;
-      arrEnemies.push(enemy);
     }
     generateWave = false;
   }
 
-  if (currentEnemies === 0 && currentOres === 0) {
+  // WAVE FINALIZATION
+  if (currentEnemies === 0) {
     if (maxOres <= 20) {
       maxOres++;
+    }
+    if (currentEnemies <= 60) {
+      maxEnemies++;
     }
     waveCounter++;
     document.querySelector("#waveViewer").innerText = waveCounter;
@@ -196,6 +206,10 @@ const gameLoop = (firstExec) => {
   if (arrEnemies.length !== 0) {
     arrEnemies.forEach((enemy, index) => {
       enemy.spawnPlayer();
+      // enemy.canMoveDown = true;
+      // enemy.canMoveLeft = true;
+      // enemy.canMoveRight = true;
+      // enemy.canMoveUp = true;
 
       // COLLISIONS PLAYER-ENEMY ENEMY-PLAYER
       calculateNextCollision(enemy, player);
@@ -203,13 +217,13 @@ const gameLoop = (firstExec) => {
       //
 
       //COLLISIONS BETWEEN ENEMIES
-      // SOME PROBLEMS, ENEMIES GET STUCK, TO REVIEW
+      //  SOME PROBLEMS, ENEMIES GET STUCK, TO REVIEW
       // arrEnemies.forEach((enemySec, index2) => {
       //   if (enemy === enemySec || index === index2) {
       //     return;
       //   }
-      //   // calculateNextCollision(enemy, enemySec);
-      //   // calculateNextCollision(enemySec, enemy);
+      //   calculateNextCollision(enemy, enemySec);
+      // calculateNextCollision(enemySec, enemy);
       // });
 
       enemy.findPlayer(player.posX, player.posY);

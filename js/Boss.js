@@ -1,4 +1,4 @@
-class Enemy {
+class Boss {
   constructor(posX, posY, type, maxHP) {
     this.direction = 0;
     this.health = maxHP;
@@ -50,22 +50,7 @@ class Enemy {
       this.swingHasStarted = false;
     }
 
-    if (this.posX < 16) {
-      this.movingX = 1;
-      this.movementType = 3;
-      this.playerMoving = true;
-      this.posX += this.speed;
-    } else if (this.posX > canvas.width - 16) {
-      this.movingX = -1;
-      this.movementType = 1;
-      this.playerMoving = true;
-      this.posX -= this.speed;
-    } else if (this.posY > canvas.height - 16) {
-      this.movingY = -1;
-      this.movementType = 2;
-      this.playerMoving = true;
-      this.posY -= this.speed;
-    } else if (difXY === 0 || this.swingHasStarted) {
+    if (difXY === 0 || this.swingHasStarted) {
       if (this.swing) {
         if (this.posX >= x && this.canMoveLeft) {
           this.movingX = -1;
@@ -132,23 +117,23 @@ class Enemy {
   };
 
   spriteSelector = (type) => {
-    if (type === "normal") {
+    if (type === "golem") {
       if (this.movementType === 0 && this.playerMoving === true) {
-        return enemyWalkImgDown;
+        return bossIdle;
       } else if (this.movementType === 1 && this.playerMoving === true) {
-        return enemyWalkImgLeft;
+        return bossIdle;
       } else if (this.movementType === 2 && this.playerMoving === true) {
-        return enemyWalkImgUp;
+        return bossIdle;
       } else if (this.movementType === 3 && this.playerMoving === true) {
-        return enemyWalkImgRight;
+        return bossIdle;
       } else if (this.movementType === 0 && this.playerMoving === false) {
-        return enemyIdleImgDown;
+        return bossIdle;
       } else if (this.movementType === 1 && this.playerMoving === false) {
-        return enemyIdleImgLeft;
+        return bossIdle;
       } else if (this.movementType === 2 && this.playerMoving === false) {
-        return enemyIdleImgUp;
+        return bossIdle;
       } else if (this.movementType === 3 && this.playerMoving === false) {
-        return enemyIdleImgRight;
+        return bossIdle;
       }
     }
   };
@@ -158,30 +143,30 @@ class Enemy {
     let imgToUse = this.spriteSelector(this.type);
 
     // TAMAÑO TILE DEFECTO
-    let tileHeight = 16;
-    let tileWidth = 16;
+    let tileHeight = 48;
+    let tileWidth = 48;
     let tileOutputSize = 1;
-    let tileSize = 16;
+    let tileSize = 48;
     let atlasHeight = tileHeight;
     let atlasWidth = tileWidth;
     let mapIndex = 0;
 
     // CAMBIO TAMAÑO DE ATLAS Y DE OUTPUT DEL PERSONAJE SEGUN SE MUEVE O SE QUEDA QUIETO
     if (this.playerMoving === true && this.isAttacking === false) {
-      atlasHeight = 17;
-      atlasWidth = 96;
+      atlasHeight = 47;
+      atlasWidth = 192;
     } else if (this.playerMoving === false && this.isAttacking === false) {
-      atlasHeight = 16;
-      atlasWidth = 96;
+      atlasHeight = 47;
+      atlasWidth = 192;
     } else if (this.isAttacking === true) {
       //ARRIBA O ABAJO
       if (this.movementType === 0 || this.movementType === 2) {
-        atlasHeight = 23;
-        atlasWidth = 138;
+        atlasHeight = 47;
+        atlasWidth = 192;
       } // DER O IZQ
       else if (this.movementType === 1 || this.movementType === 3) {
-        atlasHeight = 21;
-        atlasWidth = 96;
+        atlasHeight = 47;
+        atlasWidth = 192;
       }
     }
     // VELOCIDAD DE ANIMACION
@@ -195,10 +180,10 @@ class Enemy {
     }
 
     tileHeight = atlasHeight;
-    tileWidth = atlasWidth / 6;
+    tileWidth = atlasWidth / 4;
     let updatedTileSizeWx = tileWidth * tileOutputSize;
     let updatedTileSizeHy = tileHeight * tileOutputSize;
-    let widthIterator = atlasWidth / 6;
+    let widthIterator = atlasWidth / 4;
     // let arrayTest = [];
     // console.log(tileHeight, tileWidth, atlasHeight, atlasWidth);
     for (let row = 0; row < atlasWidth; row += widthIterator) {

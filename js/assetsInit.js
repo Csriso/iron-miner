@@ -80,6 +80,10 @@ enemyWalkImgLeft.src = "./assets/enemy/walk/walk_left.png";
 enemyWalkImgUp.src = "./assets/enemy/walk/walk_up.png";
 enemyWalkImgRight.src = "./assets/enemy/walk/walk_right.png";
 
+//ENEMY CHARACTER WALK
+const bossIdle = new Image();
+bossIdle.src = "./assets/boss/golem/idle.png";
+
 // ITEMS
 const heartSprite = new Image();
 heartSprite.src = "./assets/heart.png";

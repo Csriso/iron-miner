@@ -33,6 +33,42 @@ const randomHeightAndWidthWithPlayer = (player) => {
   return { height: randomHeight, width: randomWidth };
 };
 
+const generateOnBorders = () => {
+  let random = Math.floor(Math.random() * 6) + 1;
+  let randomPosition = Math.floor(Math.random() * 3) + 1;
+  let randomHeight = 0;
+  let randomWidth = 0;
+  console.log(random, randomPosition);
+  switch (randomPosition) {
+    case 1:
+      // LEFT BORDER
+      randomHeight = 272 + random * 16;
+      randomWidth = -16;
+      console.log("Y", randomHeight, "X", randomWidth);
+
+      return { height: randomHeight, width: randomWidth };
+      break;
+    case 2:
+      // DOWN BORDER
+      randomHeight = canvas.height + 16;
+      randomWidth = 272 + random * 16;
+      console.log("Y", randomHeight, "X", randomWidth);
+
+      return { height: randomHeight, width: randomWidth };
+      break;
+    case 3:
+      // RIGHT BORDER
+      randomHeight = 272 + random * 16;
+      randomWidth = canvas.width + 16;
+      console.log("Y", randomHeight, "X", randomWidth);
+
+      return { height: randomHeight, width: randomWidth };
+      break;
+    default:
+      break;
+  }
+};
+
 const showHealthImage = (health, maxHealth) => {
   let step = player.maxHealth / 14;
   let sumSteps = 0;

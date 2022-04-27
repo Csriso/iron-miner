@@ -1,9 +1,9 @@
 drawAllTiles = (param) => {
-  drawGrass();
-  drawRocks(param);
+  drawFloor();
+  drawCollisionLayer(param);
 };
 
-drawGrass = () => {
+drawFloor = () => {
   const tileAtlas = new Image();
   tileAtlas.src = "./assets/serene.png";
   let tileSize = 16;
@@ -44,7 +44,7 @@ drawGrass = () => {
     }
   }
 };
-drawRocks = (param) => {
+drawCollisionLayer = (param) => {
   const tileAtlas = new Image();
   tileAtlas.src = "./assets/serene.png";
   let tileSize = 16;
