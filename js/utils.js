@@ -34,13 +34,22 @@ const randomHeightAndWidthWithPlayer = (player) => {
 };
 
 const showHealthImage = (health, maxHealth) => {
-  ///HACER MAÑANA
   let step = player.maxHealth / 14;
+  let sumSteps = 0;
   let healthImgToChange = document.querySelector("#health-img");
+  let dynamicArr = [];
+  for (let i = 0; i < 14; i++) {
+    sumSteps += step;
+    dynamicArr.push(Math.round(sumSteps));
+  }
+  console.log(dynamicArr);
   let arrImages = [4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
   let toFind = Math.floor((health * 56) / 100);
-  let resultFind = findClosest(arrImages, toFind);
-  healthImgToChange.src = "./assets/health/" + resultFind + "px.png";
+
+  let resultFind = findClosest(dynamicArr, health);
+  let indexOfFind = dynamicArr.indexOf(resultFind);
+  healthImgToChange.src =
+    "./assets/health/" + arrImages[indexOfFind] + "px.png";
   if (health === 0) {
     healthImgToChange.src = "./assets/health/0px.png";
   }

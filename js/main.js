@@ -203,14 +203,14 @@ const gameLoop = (firstExec) => {
       //
 
       //COLLISIONS BETWEEN ENEMIES
-      arrEnemies.forEach((enemySec, index2) => {
-        if (enemy === enemySec || index === index2) {
-          return;
-        }
-        calculateNextCollision(enemy, enemySec);
-        // calculateNextCollision(enemySec, enemy);
-      });
-      console.log(enemy.health);
+      // SOME PROBLEMS, ENEMIES GET STUCK, TO REVIEW
+      // arrEnemies.forEach((enemySec, index2) => {
+      //   if (enemy === enemySec || index === index2) {
+      //     return;
+      //   }
+      //   // calculateNextCollision(enemy, enemySec);
+      //   // calculateNextCollision(enemySec, enemy);
+      // });
 
       enemy.findPlayer(player.posX, player.posY);
       if (collisionWithPlayer(enemy) && player.health > 0) {
