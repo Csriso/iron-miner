@@ -42,10 +42,8 @@ const showHealthImage = (health, maxHealth) => {
     sumSteps += step;
     dynamicArr.push(Math.round(sumSteps));
   }
-  console.log(dynamicArr);
   let arrImages = [4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56];
   let toFind = Math.floor((health * 56) / 100);
-
   let resultFind = findClosest(dynamicArr, health);
   let indexOfFind = dynamicArr.indexOf(resultFind);
   healthImgToChange.src =
