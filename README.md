@@ -36,11 +36,11 @@
 
 ## Backlog
 
-- Shop to improve health and attributes.
-
-- Trees with the same functionality of iron ores.
+- Shop to improve health and attributes.✔️
 
 - Improve collisions.
+
+- Add a boss and new enemies
 
 
 ## Proyect layout
