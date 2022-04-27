@@ -69,11 +69,6 @@ let createEvents = () => {
   });
   // VOLUME CONTROL FINISH
 
-  // let startGameBtn = document.querySelector("#startBtn");
-  // startGameBtn.addEventListener("click", function (e) {
-  //   startGame();
-  // });
-
   const burgerMenuBtn = document.querySelector("#burgerIcon");
   const hiddenMenu = document.querySelector("#menu");
   burgerMenuBtn.addEventListener("click", function (e) {

@@ -204,19 +204,23 @@ canvas {
   height: 100%;
 }
 .textRightScore{
-  font-size: 30px;  
+  font-size: 25px;  
   margin: 0;
   margin-bottom: 10px;
   text-shadow: 2px 2px 5px black;
 }
 .score-text{
   margin-top: 130px;
+
 }
 .items-shop{
-  font-size: 28px;
+  font-size: 25px;
   margin: 0;
   color: red;
 
+}
+#store{
+  margin-top: 10px;
 }
 .items-shop p {
   margin: 5px;

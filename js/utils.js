@@ -3,18 +3,33 @@ const randomNumber = (max, min) => {
 };
 
 const randomHeight = () => {
-  let randomHeight = randomNumber(canvas.height - 16, 16);
+  let randomHeight = randomNumber(canvas.height - 32, 32);
   return randomHeight;
 };
 
 const randomWidth = () => {
-  let randomWidth = randomNumber(canvas.width - 16, 16);
+  let randomWidth = randomNumber(canvas.width - 32, 32);
   return randomWidth;
 };
 
-const randonHeightAndWidth = () => {
-  let randomHeight = randomNumber(canvas.height - 16, 16);
-  let randomWidth = randomNumber(canvas.width - 16, 16);
+const randomHeightAndWidth = () => {
+  let randomHeight = randomNumber(canvas.height - 32, 32);
+  let randomWidth = randomNumber(canvas.width - 32, 32);
+  return { height: randomHeight, width: randomWidth };
+};
+
+const randomHeightAndWidthWithPlayer = (player) => {
+  //
+  let randomHeight = randomNumber(canvas.height - 32, 32);
+  let randomWidth = randomNumber(canvas.width - 32, 32);
+  while (
+    (randomWidth < player.posX + 16 && randomWidth > player.posX) ||
+    (randomHeight < player.posY + 16 && randomHeight > player.posY) ||
+    collisionDetectorCoords(randomWidth, randomHeight, 16, 16, shop)
+  ) {
+    randomHeight = randomNumber(canvas.height - 32, 32);
+    randomWidth = randomNumber(canvas.width - 32, 32);
+  }
   return { height: randomHeight, width: randomWidth };
 };
 

@@ -6,6 +6,7 @@ let buyArmor = () => {
     storeSound.play();
 
     player.maxHealth *= 2;
+    player.health = player.maxHealth;
     player.coins -= priceSelector.innerText;
     priceSelector.innerText = priceSelector.innerText * 2;
     if (Number(levelSelector.innerText) <= 5) {

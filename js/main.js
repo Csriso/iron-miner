@@ -10,7 +10,7 @@ let player = new Player();
 let arrEnemies = [];
 let mapCollisions = [];
 let mapObjectsArr = [];
-let maxOres = 2;
+let maxOres = 5;
 let currentOres = 0;
 let currentEnemies = 0;
 let maxEnemies = 3;
@@ -24,6 +24,8 @@ let firstEntranceShop = true;
 let difficultyLevelEnemyCount = 0;
 let increaseDifficultyEnemyCount = false;
 let increaseDifficultyEnemyHP = false;
+let generateWave = true;
+let waveCounter = 1;
 
 const shop = { posX: 48, posY: 64, w: 48, h: 32 };
 let fps = 60;
@@ -60,7 +62,9 @@ const restartGame = () => {
   collisionCount = 0;
   nextCollision = false;
   inTheShop = false;
+  generateWave = true;
   difficultyLevelEnemyCount = 0;
+  waveCounter = 1;
   increaseDifficultyEnemyCount = false;
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
@@ -144,27 +148,49 @@ const gameLoop = (firstExec) => {
     increaseDifficultyEnemyCount = true;
   }
 
-  if (currentOres < maxOres) {
-    currentOres++;
-    let firstOre = new MapObject(randomWidth(), randomHeight(), "goldenOre");
-    mapObjectsArr.push(firstOre);
-  }
-  let hpDifficulty = 0;
-  if (currentEnemies < maxEnemies) {
-    let randomHeightAndWidth = randonHeightAndWidth();
-    if (difficultyLevelEnemyCount === 0) {
-      hpDifficulty = 1;
-    } else {
-      hpDifficulty = difficultyLevelEnemyCount;
+  if (currentOres < maxOres && generateWave === true) {
+    while (currentOres < maxOres) {
+      let randomHeightAndWidth = randomHeightAndWidthWithPlayer(player);
+
+      let firstOre = new MapObject(
+        randomHeightAndWidth.width,
+        randomHeightAndWidth.height,
+        "goldenOre"
+      );
+      mapObjectsArr.push(firstOre);
+      currentOres++;
     }
-    const enemy = new Enemy(
-      randomHeightAndWidth.width,
-      randomHeightAndWidth.height,
-      "normal",
-      hpDifficulty * 100
-    );
-    currentEnemies++;
-    arrEnemies.push(enemy);
+  }
+
+  //DIFFICULTY
+  let hpDifficulty = 0;
+  if (currentEnemies < maxEnemies && generateWave === true) {
+    while (currentEnemies < maxEnemies) {
+      let randomHeightAndWidth = randomHeightAndWidthWithPlayer(player);
+      if (difficultyLevelEnemyCount === 0) {
+        hpDifficulty = 1;
+      } else {
+        hpDifficulty = difficultyLevelEnemyCount;
+      }
+      const enemy = new Enemy(
+        randomHeightAndWidth.width,
+        randomHeightAndWidth.height,
+        "normal",
+        waveCounter * 100
+      );
+      currentEnemies++;
+      arrEnemies.push(enemy);
+    }
+    generateWave = false;
+  }
+
+  if (currentEnemies === 0 && currentOres === 0) {
+    if (maxOres <= 20) {
+      maxOres++;
+    }
+    waveCounter++;
+    document.querySelector("#waveViewer").innerText = waveCounter;
+    generateWave = true;
   }
 
   if (arrEnemies.length !== 0) {
@@ -181,9 +207,11 @@ const gameLoop = (firstExec) => {
         if (enemy === enemySec || index === index2) {
           return;
         }
-        // calculateNextCollision(enemy, enemySec);
+        calculateNextCollision(enemy, enemySec);
         // calculateNextCollision(enemySec, enemy);
       });
+      console.log(enemy.health);
+
       enemy.findPlayer(player.posX, player.posY);
       if (collisionWithPlayer(enemy) && player.health > 0) {
         if (player.isAttacking === true) {
