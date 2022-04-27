@@ -35,33 +35,27 @@ const randomHeightAndWidthWithPlayer = (player) => {
 
 const generateOnBorders = () => {
   let random = Math.floor(Math.random() * 6) + 1;
+  let randomSecond = Math.floor(Math.random() * 6) + 1;
   let randomPosition = Math.floor(Math.random() * 3) + 1;
   let randomHeight = 0;
   let randomWidth = 0;
-  console.log(random, randomPosition);
   switch (randomPosition) {
     case 1:
       // LEFT BORDER
       randomHeight = 272 + random * 16;
-      randomWidth = -16;
-      console.log("Y", randomHeight, "X", randomWidth);
-
+      randomWidth = -16 * randomSecond;
       return { height: randomHeight, width: randomWidth };
       break;
     case 2:
       // DOWN BORDER
-      randomHeight = canvas.height + 16;
+      randomHeight = canvas.height + 16 * randomSecond;
       randomWidth = 272 + random * 16;
-      console.log("Y", randomHeight, "X", randomWidth);
-
       return { height: randomHeight, width: randomWidth };
       break;
     case 3:
       // RIGHT BORDER
       randomHeight = 272 + random * 16;
-      randomWidth = canvas.width + 16;
-      console.log("Y", randomHeight, "X", randomWidth);
-
+      randomWidth = canvas.width + 16 * randomSecond;
       return { height: randomHeight, width: randomWidth };
       break;
     default:

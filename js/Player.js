@@ -4,8 +4,8 @@ class Player {
     this.health = 100;
     this.maxHealth = 100;
     this.stamina = 100;
-    this.posX = 100;
-    this.posY = 100;
+    this.posX = 320;
+    this.posY = 320;
     this.w = 16;
     this.h = 16;
     this.speed = 2;
