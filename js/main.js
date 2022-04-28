@@ -26,6 +26,7 @@ let increaseDifficultyEnemyCount = false;
 let increaseDifficultyEnemyHP = false;
 let generateWave = true;
 let waveCounter = 1;
+let enemyDmg = 1;
 
 const shop = { posX: 48, posY: 64, w: 48, h: 32 };
 let fps = 60;
@@ -44,7 +45,6 @@ const refreshScore = () => {
 };
 const showScores = () => {
   if (window.localStorage.getItem("scores")) {
-    console.log("SHOWSCORES");
     if (document.querySelector("#lb-placeholder")) {
       document.querySelector("#lb-placeholder").style.display = "none";
     }
@@ -58,10 +58,8 @@ const showScores = () => {
       }
       return 0;
     });
-    console.log(scoresArr);
     document.querySelector("#score-container").innerHTML = "";
     scoresArr.forEach((elem, index) => {
-      console.log(elem);
       if (index <= 11) {
         document.querySelector(
           "#score-container"
@@ -99,7 +97,7 @@ const restartGame = () => {
   increaseDifficultyEnemyHP = false;
   generateWave = true;
   waveCounter = 1;
-
+  enemyDmg = 1;
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
   document.querySelector("#gameoverBtn").style.display = "none";
@@ -226,7 +224,6 @@ const gameLoop = (firstExec) => {
       } else {
         // let randomEnemy = Math.round(Math.random());
         let randomEnemy = 0;
-        console.log(randomEnemy);
         let enemy;
         if (randomEnemy === 0) {
           enemy = new Enemy(
@@ -260,6 +257,7 @@ const gameLoop = (firstExec) => {
       maxEnemies++;
     }
     waveCounter++;
+    enemyDmg++;
     document.querySelector("#waveViewer").innerText = waveCounter;
     generateWave = true;
   }
@@ -306,7 +304,9 @@ const gameLoop = (firstExec) => {
           }
           enemy.health -= player.damage;
         }
-        player.reciveDamage(1);
+        let actualDmg = Math.ceil(waveCounter / 2);
+        console.log(actualDmg);
+        player.reciveDamage(actualDmg);
         playerSounds(player.health);
       } else if (player.isAttacking && !collisionWithPlayer(enemy)) {
         attackSound.play();
@@ -378,6 +378,9 @@ const gameLoop = (firstExec) => {
 
   //PLAYER DIES
   if (player.health <= 0) {
+    document.querySelector("canvas").style.display = "none";
+    document.querySelector("#nameLogo").style.display = "block";
+    document.querySelector("#gameoverBtn").style.display = "block";
     bgMusic.pause();
     bgMusic.currentTime = 0;
     gruntPlayer20.play();
@@ -386,9 +389,6 @@ const gameLoop = (firstExec) => {
     mapCollisions = [];
     timeCounter = 0;
     isGameOn = false;
-    document.querySelector("canvas").style.display = "none";
-    document.querySelector("#nameLogo").style.display = "block";
-    document.querySelector("#gameoverBtn").style.display = "block";
     saveScore();
     showScores();
   }

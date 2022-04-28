@@ -39,7 +39,6 @@ const generateOnBorders = () => {
   let randomPosition = Math.floor(Math.random() * 3) + 1;
   let randomHeight = 0;
   let randomWidth = 0;
-  console.log(random, randomSecond);
   switch (randomPosition) {
     case 1:
       // LEFT BORDER
