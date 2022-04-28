@@ -52,7 +52,7 @@ const restartGame = () => {
   arrEnemies = [];
   mapCollisions = [];
   mapObjectsArr = [];
-  maxOres = 2;
+  maxOres = 5;
   currentOres = 0;
   currentEnemies = 0;
   maxEnemies = 3;
@@ -62,15 +62,19 @@ const restartGame = () => {
   collisionCount = 0;
   nextCollision = false;
   inTheShop = false;
-  generateWave = true;
+  firstEntranceShop = true;
   difficultyLevelEnemyCount = 0;
-  waveCounter = 1;
   increaseDifficultyEnemyCount = false;
+  increaseDifficultyEnemyHP = false;
+  generateWave = true;
+  waveCounter = 1;
+
   document.querySelector("canvas").style.display = "block";
   document.querySelector("#startBtn").style.display = "none";
   document.querySelector("#gameoverBtn").style.display = "none";
   document.querySelector("#nameLogo").style.display = "none";
   document.querySelector("#health-img").src = "./assets/health/56px.png";
+  document.querySelector("#waveViewer").innerText = waveCounter;
   startGame();
 };
 
@@ -135,18 +139,7 @@ const gameLoop = (firstExec) => {
     calculateNextCollision(player, collisionObj);
   });
 
-  // if (increaseDifficultyEnemyCount === true) {
-  //   maxEnemies *= 2;
-  //   increaseDifficultyEnemyCount = false;
-  // }
-
-  // if (
-  //   difficultyLevelEnemyCount !== Math.floor(player.score / 200) &&
-  //   Math.floor(player.score / 200) <= 5
-  // ) {
-  //   difficultyLevelEnemyCount = Math.floor(player.score / 200);
-  //   increaseDifficultyEnemyCount = true;
-  // }
+  document.querySelector("#waveViewer").innerText = waveCounter;
 
   // GENERATE ORES
   if (currentOres < maxOres && generateWave === true) {
