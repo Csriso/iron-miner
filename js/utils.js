@@ -34,11 +34,12 @@ const randomHeightAndWidthWithPlayer = (player) => {
 };
 
 const generateOnBorders = () => {
-  let random = Math.floor(Math.random() * 6) + 1;
-  let randomSecond = Math.floor(Math.random() * 6) + 1;
+  let random = Math.floor(Math.random() * 5) + 1;
+  let randomSecond = Math.floor(Math.random() * 8) + 1;
   let randomPosition = Math.floor(Math.random() * 3) + 1;
   let randomHeight = 0;
   let randomWidth = 0;
+  console.log(random, randomSecond);
   switch (randomPosition) {
     case 1:
       // LEFT BORDER
