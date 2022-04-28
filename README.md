@@ -39,6 +39,8 @@
 
 - Shop to improve health and attributes.✔️
 
+- Local leaderboard.✔️
+
 - Improve collisions.
 
 - Add a boss and new enemies
