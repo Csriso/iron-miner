@@ -20,14 +20,15 @@ body {
   align-items: center;
   z-index: 3;
   pointer-events: none;
+  width: 100%;
 }
 .container-left{
   font-family: pixelFont;
   font-size: 28px;
   color: white;
   text-shadow: 2px 2px 5px black;
-
 }
+
 
 .container-left .table h3, .container-left .table p{
   margin: 0% 10%;
@@ -48,7 +49,7 @@ body {
   /* opacity: 0; */
   /* testing PURPPOSES */
   height: 80vh;
-  width: 90%;
+  width: 432px;
   margin: 0;
   justify-self: center;
   align-self: center;
@@ -90,7 +91,7 @@ body {
   height: 100%;
   background-image: url("../assets/mosscbble.png");
   background-size: 100px;
-
+  
   text-overflow: none;
   z-index: 3;
 }
@@ -261,6 +262,15 @@ canvas {
 
 .item-shop img{
   width: 50px;
+}
+.score-container{
+  width: 100%;
+  margin-top: 15px;
+}
+p.score{
+  margin:  25px 0 0 0!important;
+  text-align: center !important;
+  width: 100%;
 }
 @font-face {
   font-family: pixelFont;

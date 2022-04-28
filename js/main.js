@@ -42,6 +42,37 @@ const refreshScore = () => {
   coinsSelector.innerText = player.coins;
   healthSelector.innerText = player.maxHealth;
 };
+const showScores = () => {
+  if (window.localStorage.getItem("scores")) {
+    console.log("SHOWSCORES");
+    if (document.querySelector("#lb-placeholder")) {
+      document.querySelector("#lb-placeholder").style.display = "none";
+    }
+    let scoresArr = JSON.parse(localStorage.getItem("scores"));
+    scoresArr.sort(function (a, b) {
+      if (a.score < b.score) {
+        return 1;
+      }
+      if (a.score > b.score) {
+        return -1;
+      }
+      return 0;
+    });
+    console.log(scoresArr);
+    document.querySelector("#score-container").innerHTML = "";
+    scoresArr.forEach((elem, index) => {
+      console.log(elem);
+      if (index <= 11) {
+        document.querySelector(
+          "#score-container"
+        ).innerHTML += `<p class="score">
+        <span class="name">${elem.name}</span> - <span class="score">${elem.score}</span>
+        </p>`;
+      }
+    });
+  }
+};
+showScores();
 
 const restartGame = () => {
   // RESET ALL VARS
@@ -92,6 +123,29 @@ const startGame = () => {
   bgMusic.loop = true;
   bgMusic.play();
   // bgMusic.volume = 0.1;
+};
+
+const saveScore = () => {
+  let nameVal = prompt("Introduce your name to save the score");
+  let scoreVal = document.querySelector("#scoreViewer").innerText;
+  let scoreObj = { name: nameVal, score: scoreVal };
+  if (
+    nameVal !== "null" &&
+    nameVal !== undefined &&
+    nameVal !== "" &&
+    nameVal !== null
+  ) {
+    if (window.localStorage.getItem("scores")) {
+      let scores = localStorage.getItem("scores");
+      let scoresParsed = JSON.parse(scores);
+      scoresParsed.push(scoreObj);
+      localStorage.removeItem(scores);
+      localStorage.setItem("scores", JSON.stringify(scoresParsed));
+    } else {
+      let scoreObjArr = [scoreObj];
+      window.localStorage.setItem("scores", JSON.stringify(scoreObjArr));
+    }
+  }
 };
 
 const checkCoinsShop = () => {
@@ -210,6 +264,7 @@ const gameLoop = (firstExec) => {
     generateWave = true;
   }
 
+  // MANAGE ENEMIES
   if (arrEnemies.length !== 0) {
     arrEnemies.forEach((enemy, index) => {
       enemy.spawnPlayer();
@@ -263,6 +318,7 @@ const gameLoop = (firstExec) => {
 
   showHealthImage(player.health, player.maxHealth);
 
+  // MANAGE MAP OBJECTS
   if (mapObjectsArr.length !== 0) {
     mapObjectsArr.forEach((mapObject, index) => {
       mapObject.spawnObject();
@@ -333,6 +389,8 @@ const gameLoop = (firstExec) => {
     document.querySelector("canvas").style.display = "none";
     document.querySelector("#nameLogo").style.display = "block";
     document.querySelector("#gameoverBtn").style.display = "block";
+    saveScore();
+    showScores();
   }
 
   // MOVE THE PLAYER AFTER CHECKING ALL COLLISIONS FIRST
