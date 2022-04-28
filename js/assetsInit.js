@@ -84,6 +84,36 @@ enemyWalkImgRight.src = "./assets/enemy/walk/walk_right.png";
 const bossIdle = new Image();
 bossIdle.src = "./assets/boss/golem/idle.png";
 
+//ATTACK ENEMY2
+const enemy2AttackImgDown = new Image();
+const enemy2AttackImgLeft = new Image();
+const enemy2AttackImgUp = new Image();
+const enemy2AttackImgRight = new Image();
+enemy2AttackImgDown.src = "./assets/enemy2/attackdown.png";
+enemy2AttackImgLeft.src = "./assets/enemy2/attackleft.png";
+enemy2AttackImgUp.src = "./assets/enemy2/attacktop.png";
+enemy2AttackImgRight.src = "./assets/enemy2/attackright.png";
+
+//ENEMY2 CHARACTER IDLE
+const enemy2IdleImgDown = new Image();
+const enemy2IdleImgLeft = new Image();
+const enemy2IdleImgUp = new Image();
+const enemy2IdleImgRight = new Image();
+enemy2IdleImgDown.src = "./assets/enemy2/idledown.png";
+enemy2IdleImgLeft.src = "./assets/enemy2/idleleft.png";
+enemy2IdleImgUp.src = "./assets/enemy2/idletop.png";
+enemy2IdleImgRight.src = "./assets/enemy2/idleright.png";
+
+//ENEMY2 CHARACTER WALK
+const enemy2WalkImgDown = new Image();
+const enemy2WalkImgLeft = new Image();
+const enemy2WalkImgUp = new Image();
+const enemy2WalkImgRight = new Image();
+enemy2WalkImgDown.src = "./assets/enemy2/runningdown.png";
+enemy2WalkImgLeft.src = "./assets/enemy2/runningleft.png";
+enemy2WalkImgUp.src = "./assets/enemy2/runningtop.png";
+enemy2WalkImgRight.src = "./assets/enemy2/runningright.png";
+
 // ITEMS
 const heartSprite = new Image();
 heartSprite.src = "./assets/heart.png";

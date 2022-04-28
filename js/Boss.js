@@ -172,7 +172,7 @@ class Boss {
     // VELOCIDAD DE ANIMACION
     if (this.totalFrame === 5) {
       this.totalFrame = 0;
-      if (this.lastFrame <= 4) {
+      if (this.lastFrame <= 2) {
         this.lastFrame++;
       } else {
         this.lastFrame = 0;
@@ -185,12 +185,13 @@ class Boss {
     let updatedTileSizeHy = tileHeight * tileOutputSize;
     let widthIterator = atlasWidth / 4;
     // let arrayTest = [];
-    // console.log(tileHeight, tileWidth, atlasHeight, atlasWidth);
     for (let row = 0; row < atlasWidth; row += widthIterator) {
+      // console.log(tileHeight, tileWidth, atlasHeight, atlasWidth, row);
       // arrayTest.push(row);
       // let newposX = this.posX * tileOutputSize;
       // let newposY = this.posY * tileOutputSize;
       let animationToShow = tileWidth * this.lastFrame;
+      // console.log(animationToShow);
       // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
       context.drawImage(
         imgToUse,

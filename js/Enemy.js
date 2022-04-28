@@ -150,6 +150,36 @@ class Enemy {
       } else if (this.movementType === 3 && this.playerMoving === false) {
         return enemyIdleImgRight;
       }
+    } else if (type === "knight") {
+      if (this.isAttacking === false) {
+        if (this.movementType === 0 && this.playerMoving === true) {
+          return enemy2WalkImgDown;
+        } else if (this.movementType === 1 && this.playerMoving === true) {
+          return enemy2WalkImgLeft;
+        } else if (this.movementType === 2 && this.playerMoving === true) {
+          return enemy2WalkImgUp;
+        } else if (this.movementType === 3 && this.playerMoving === true) {
+          return enemy2WalkImgRight;
+        } else if (this.movementType === 0 && this.playerMoving === false) {
+          return enemy2IdleImgDown;
+        } else if (this.movementType === 1 && this.playerMoving === false) {
+          return enemy2IdleImgLeft;
+        } else if (this.movementType === 2 && this.playerMoving === false) {
+          return enemy2IdleImgUp;
+        } else if (this.movementType === 3 && this.playerMoving === false) {
+          return enemy2IdleImgRight;
+        }
+      } else if (this.isAttacking === true) {
+        if (this.movementType === 0) {
+          return enemy2AttackImgDown;
+        } else if (this.movementType === 1) {
+          return enemy2AttackImgLeft;
+        } else if (this.movementType === 2) {
+          return enemy2AttackImgUp;
+        } else if (this.movementType === 3) {
+          return enemy2AttackImgRight;
+        }
+      }
     }
   };
 
@@ -165,47 +195,80 @@ class Enemy {
     let atlasHeight = tileHeight;
     let atlasWidth = tileWidth;
     let mapIndex = 0;
-
-    // CAMBIO TAMAÑO DE ATLAS Y DE OUTPUT DEL PERSONAJE SEGUN SE MUEVE O SE QUEDA QUIETO
-    if (this.playerMoving === true && this.isAttacking === false) {
-      atlasHeight = 17;
-      atlasWidth = 96;
-    } else if (this.playerMoving === false && this.isAttacking === false) {
-      atlasHeight = 16;
-      atlasWidth = 96;
-    } else if (this.isAttacking === true) {
-      //ARRIBA O ABAJO
-      if (this.movementType === 0 || this.movementType === 2) {
-        atlasHeight = 23;
-        atlasWidth = 138;
-      } // DER O IZQ
-      else if (this.movementType === 1 || this.movementType === 3) {
-        atlasHeight = 21;
+    if (this.type === "normal") {
+      // CAMBIO TAMAÑO DE ATLAS Y DE OUTPUT DEL PERSONAJE SEGUN SE MUEVE O SE QUEDA QUIETO
+      if (this.playerMoving === true && this.isAttacking === false) {
+        atlasHeight = 17;
         atlasWidth = 96;
+      } else if (this.playerMoving === false && this.isAttacking === false) {
+        atlasHeight = 16;
+        atlasWidth = 96;
+      } else if (this.isAttacking === true) {
+        //ARRIBA O ABAJO
+        if (this.movementType === 0 || this.movementType === 2) {
+          atlasHeight = 23;
+          atlasWidth = 138;
+        } // DER O IZQ
+        else if (this.movementType === 1 || this.movementType === 3) {
+          atlasHeight = 21;
+          atlasWidth = 96;
+        }
       }
+    } else if (this.type === "knight") {
+      atlasHeight = 16;
+      atlasWidth = 32;
     }
+
     // VELOCIDAD DE ANIMACION
-    if (this.totalFrame === 5) {
-      this.totalFrame = 0;
-      if (this.lastFrame <= 4) {
-        this.lastFrame++;
-      } else {
-        this.lastFrame = 0;
+    if (this.type === "knight") {
+      if (this.totalFrame === 5) {
+        this.totalFrame = 0;
+        if (this.lastFrame === 1) {
+          this.lastFrame = 0;
+        } else {
+          this.lastFrame = 1;
+        }
+      }
+    } else if (this.type === "normal") {
+      if (this.totalFrame === 5) {
+        this.totalFrame = 0;
+        if (this.lastFrame <= 4) {
+          this.lastFrame++;
+        } else {
+          this.lastFrame = 0;
+        }
       }
     }
+
+    let widthIterator;
 
     tileHeight = atlasHeight;
-    tileWidth = atlasWidth / 6;
+    if (this.type === "knight") {
+      widthIterator = atlasWidth / 2;
+      tileWidth = atlasWidth / 2;
+    } else if (this.type === "normal") {
+      tileWidth = atlasWidth / 6;
+      tileWidth = atlasWidth / 6;
+    }
     let updatedTileSizeWx = tileWidth * tileOutputSize;
     let updatedTileSizeHy = tileHeight * tileOutputSize;
-    let widthIterator = atlasWidth / 6;
     // let arrayTest = [];
-    // console.log(tileHeight, tileWidth, atlasHeight, atlasWidth);
+    // console.log(
+    //   "TILEHEIGHT",
+    //   tileHeight,
+    //   "TILEWITDTH",
+    //   tileWidth,
+    //   "ATLASHEIGHT",
+    //   atlasHeight,
+    //   "ATLASWIDTH",
+    //   atlasWidth
+    // );
     for (let row = 0; row < atlasWidth; row += widthIterator) {
       // arrayTest.push(row);
       // let newposX = this.posX * tileOutputSize;
       // let newposY = this.posY * tileOutputSize;
       let animationToShow = tileWidth * this.lastFrame;
+      // console.log(animationToShow);
       // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
       context.drawImage(
         imgToUse,

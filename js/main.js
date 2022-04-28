@@ -170,12 +170,26 @@ const gameLoop = (firstExec) => {
         currentEnemies = maxEnemies;
         arrEnemies.push(boss);
       } else {
-        const enemy = new Enemy(
-          randomHeightAndWidth.width,
-          randomHeightAndWidth.height,
-          "normal",
-          waveCounter * 100
-        );
+        // let randomEnemy = Math.round(Math.random());
+        let randomEnemy = 0;
+        console.log(randomEnemy);
+        let enemy;
+        if (randomEnemy === 0) {
+          enemy = new Enemy(
+            randomHeightAndWidth.width,
+            randomHeightAndWidth.height,
+            "normal",
+            waveCounter * 100
+          );
+        } else {
+          enemy = new Enemy(
+            randomHeightAndWidth.width,
+            randomHeightAndWidth.height,
+            "knight",
+            waveCounter * 100
+          );
+        }
+
         arrEnemies.push(enemy);
       }
       currentEnemies++;
