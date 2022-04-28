@@ -305,7 +305,7 @@ const gameLoop = (firstExec) => {
           enemy.health -= player.damage;
         }
         let actualDmg = Math.ceil(waveCounter / 2);
-        console.log(actualDmg);
+        // console.log(actualDmg);
         player.reciveDamage(actualDmg);
         playerSounds(player.health);
       } else if (player.isAttacking && !collisionWithPlayer(enemy)) {

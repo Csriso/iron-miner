@@ -13,7 +13,7 @@ let buyArmor = () => {
       imgSelector.src =
         "./assets/items/armor/lvl" + levelSelector.innerText + ".png";
     }
-    console.log("./assets/items/armor/lvl" + levelSelector.innerText + ".png");
+    //console.log("./assets/items/armor/lvl" + levelSelector.innerText + ".png");
     levelSelector.innerText = Number(levelSelector.innerText) + 1;
     // console.log("MAXVIDA", player.maxHealth);
   }
