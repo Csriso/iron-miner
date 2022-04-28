@@ -13,6 +13,7 @@
 
 ![App Screenshot](https://github.com/Csriso/iron-miner/blob/main/screenshot.png?raw=true)
 
+![App Screenshot](https://github.com/Csriso/iron-miner/blob/main/screenshot2.png?raw=true)
 
 ## MVP
 
