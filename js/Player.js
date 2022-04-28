@@ -65,14 +65,12 @@ class Player {
       posX === undefined &&
       keyEvent === "keyDownSpace"
     ) {
-      this.playerMoving = false;
       this.isAttacking = true;
     } else if (
       posY === undefined &&
       posX === undefined &&
       keyEvent === "keyUpSpace"
     ) {
-      this.playerMoving = false;
       this.isAttacking = false;
     }
     if (posX && posX !== undefined) {
